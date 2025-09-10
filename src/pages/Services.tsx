@@ -95,52 +95,6 @@ const Services = () => {
     },
   ];
 
-  const packages = [
-    {
-      name: 'Startup',
-      price: '$2,500',
-      period: '/month',
-      description: 'Perfect for early-stage projects looking to establish their presence.',
-      features: [
-        'Community setup & management',
-        'Content creation (4 posts/week)',
-        'Basic analytics reporting',
-        'Monthly strategy calls',
-      ],
-      popular: false,
-    },
-    {
-      name: 'Growth',
-      price: '$7,500',
-      period: '/month',
-      description: 'Comprehensive growth package for scaling projects.',
-      features: [
-        'Full community management',
-        'Multi-channel content strategy',
-        'KOL & influencer partnerships',
-        'Advanced analytics & optimization',
-        'Bi-weekly strategy sessions',
-        'PR & media outreach',
-      ],
-      popular: true,
-    },
-    {
-      name: 'Enterprise',
-      price: 'Custom',
-      period: '',
-      description: 'Tailored solutions for established projects with complex needs.',
-      features: [
-        'Custom strategy development',
-        'Dedicated account team',
-        'Global expansion support',
-        'Crisis management',
-        'Priority support & consultation',
-        'White-glove service',
-      ],
-      popular: false,
-    },
-  ];
-
   return (
     <main className="min-h-screen pt-20">
       {/* Hero Section */}
@@ -222,86 +176,8 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Packages Section */}
-      <section className="section-padding bg-surface/50">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Choose your <span className="gradient-text">growth package</span>
-            </h2>
-            <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-              Flexible packages designed to meet your project's specific needs and budget.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {packages.map((pkg, index) => (
-              <motion.div
-                key={pkg.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`relative ${pkg.popular ? 'scale-105' : ''}`}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-gradient-primary px-4 py-2 rounded-full text-white text-sm font-semibold">
-                      Most Popular
-                    </div>
-                  </div>
-                )}
-                
-                <div className={`bg-background border rounded-xl p-8 h-full ${
-                  pkg.popular 
-                    ? 'border-gradient-start shadow-glow-primary' 
-                    : 'border-border card-glow hover:border-gradient-start/30'
-                } transition-all duration-300`}>
-                  <h3 className="text-2xl font-bold text-text-primary mb-2">
-                    {pkg.name}
-                  </h3>
-                  <div className="flex items-baseline mb-4">
-                    <span className="text-4xl font-bold gradient-text">
-                      {pkg.price}
-                    </span>
-                    <span className="text-text-secondary ml-1">
-                      {pkg.period}
-                    </span>
-                  </div>
-                  <p className="text-text-secondary mb-8">
-                    {pkg.description}
-                  </p>
-
-                  <ul className="space-y-4 mb-8">
-                    {pkg.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-text-secondary">
-                        <div className="w-2 h-2 bg-gradient-start rounded-full mr-3 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Button 
-                    variant={pkg.popular ? "hero" : "outline-glow"} 
-                    size="lg" 
-                    className="w-full"
-                  >
-                    Get Started
-                  </Button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-surface/50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

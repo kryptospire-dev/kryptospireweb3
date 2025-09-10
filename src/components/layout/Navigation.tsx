@@ -67,7 +67,7 @@ const Navigation = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex">
-            <Button variant="hero" size="lg">
+            <Button variant="hero" size="lg" onClick={() => window.location.href = '/contact'}>
               Book a Strategy Call
             </Button>
           </div>
