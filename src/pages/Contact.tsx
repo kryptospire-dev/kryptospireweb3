@@ -1,37 +1,44 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { CONTACT_INFO, FAQ_DATA } from '@/constants/data';
+import { handleNavigation } from '@/utils/navigation';
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Clock,
+  Send,
+  CheckCircle
+} from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const Contact = () => {
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: 'Email Us',
-      content: 'hello@kryptospire.com',
-      description: 'Send us an email anytime',
-    },
-    {
-      icon: Phone,
-      title: 'Call Us',
-      content: '+1 (555) 123-4567',
-      description: 'Mon-Fri from 9am to 6pm EST',
-    },
-    {
-      icon: MapPin,
-      title: 'Visit Us',
-      content: 'San Francisco, CA',
-      description: 'Remote-first with global presence',
-    },
-    {
-      icon: Clock,
-      title: 'Response Time',
-      content: '< 24 hours',
-      description: 'We respond to all inquiries quickly',
-    },
-  ];
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    project: '',
+    budget: '',
+    message: ''
+  });
+
+  const iconMap: { [key: string]: any } = {
+    Mail, Phone, MapPin, Clock
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    alert('Thank you for your interest! We\'ll get back to you within 24 hours.');
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
   return (
     <main className="min-h-screen pt-20">
@@ -70,7 +77,7 @@ const Contact = () => {
                 <span className="gradient-text">Get Started</span> Today
               </h2>
               
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="firstName" className="text-text-primary">First Name</Label>
@@ -78,6 +85,7 @@ const Contact = () => {
                       id="firstName" 
                       placeholder="John" 
                       className="bg-surface border-border focus:border-gradient-start"
+                      onChange={(e) => handleInputChange('firstName', e.target.value)}
                     />
                   </div>
                   <div className="space-y-2">
@@ -86,6 +94,7 @@ const Contact = () => {
                       id="lastName" 
                       placeholder="Doe" 
                       className="bg-surface border-border focus:border-gradient-start"
+                      onChange={(e) => handleInputChange('lastName', e.target.value)}
                     />
                   </div>
                 </div>
@@ -97,6 +106,7 @@ const Contact = () => {
                     type="email" 
                     placeholder="john@project.com" 
                     className="bg-surface border-border focus:border-gradient-start"
+                    onChange={(e) => handleInputChange('email', e.target.value)}
                   />
                 </div>
 
@@ -106,21 +116,8 @@ const Contact = () => {
                     id="project" 
                     placeholder="Your awesome Web3 project" 
                     className="bg-surface border-border focus:border-gradient-start"
+                    onChange={(e) => handleInputChange('project', e.target.value)}
                   />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="budget" className="text-text-primary">Monthly Budget</Label>
-                  <select 
-                    id="budget"
-                    className="flex h-10 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-primary focus:border-gradient-start focus:outline-none"
-                  >
-                    <option value="">Select your budget range</option>
-                    <option value="under-5k">Under $5,000</option>
-                    <option value="5k-15k">$5,000 - $15,000</option>
-                    <option value="15k-50k">$15,000 - $50,000</option>
-                    <option value="50k-plus">$50,000+</option>
-                  </select>
                 </div>
 
                 <div className="space-y-2">
@@ -130,10 +127,12 @@ const Contact = () => {
                     placeholder="Describe your project, goals, and how we can help..." 
                     rows={6}
                     className="bg-surface border-border focus:border-gradient-start"
+                    onChange={(e) => handleInputChange('message', e.target.value)}
                   />
                 </div>
 
-                <Button variant="hero" size="lg" className="w-full">
+                <Button type="submit" variant="hero" size="lg" className="w-full">
+                  <Send className="mr-2" size={18} />
                   Send Message
                 </Button>
 
@@ -162,8 +161,8 @@ const Contact = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {contactInfo.map((info, index) => {
-                  const IconComponent = info.icon;
+                {CONTACT_INFO.map((info, index) => {
+                  const IconComponent = iconMap[info.icon];
                   return (
                     <motion.div
                       key={info.title}
@@ -192,37 +191,23 @@ const Contact = () => {
                 })}
               </div>
 
-              {/* FAQ Preview */}
+              {/* FAQ Section */}
               <div className="bg-surface border border-border rounded-xl p-8">
                 <h3 className="text-xl font-semibold text-text-primary mb-6">
                   Frequently Asked Questions
                 </h3>
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="font-medium text-text-primary mb-2">
-                      How quickly can we get started?
-                    </h4>
-                    <p className="text-text-secondary text-sm">
-                      We can typically kick off projects within 1-2 weeks of signing, depending on scope and requirements.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-text-primary mb-2">
-                      Do you work with early-stage projects?
-                    </h4>
-                    <p className="text-text-secondary text-sm">
-                      Yes! We have packages designed specifically for startups and early-stage Web3 projects.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-text-primary mb-2">
-                      What's your pricing model?
-                    </h4>
-                    <p className="text-text-secondary text-sm">
-                      We offer flexible monthly retainers, project-based pricing, and custom enterprise solutions.
-                    </p>
-                  </div>
-                </div>
+                <Accordion type="single" collapsible className="w-full">
+                  {FAQ_DATA.slice(0, 3).map((faq, index) => (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger className="text-left text-text-primary hover:text-gradient-start">
+                        {faq.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-text-secondary">
+                        {faq.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               </div>
             </motion.div>
           </div>

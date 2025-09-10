@@ -74,12 +74,12 @@
 
 /* Typography & Fonts */
 @layer base {
-  .font-sora {
-    font-family: 'Sora', sans-serif;
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
   }
   
-  .font-inter {
-    font-family: 'Inter', sans-serif;
+  .font-exo-2 {
+    font-family: 'Exo 2', sans-serif;
   }
   
   .font-orbitron {
@@ -143,10 +143,10 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter antialiased;
+    @apply bg-background text-foreground font-exo-2 antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sora font-semibold;
+    @apply font-rajdhani font-semibold;
   }
 }

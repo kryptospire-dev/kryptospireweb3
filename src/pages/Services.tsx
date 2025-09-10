@@ -1,5 +1,9 @@
 import { motion } from 'framer-motion';
-import { 
+import { Button } from '@/components/ui/button';
+import { SERVICES_DATA } from '@/constants/data';
+import { handleNavigation } from '@/utils/navigation';
+import ServiceDetails from '@/components/sections/ServiceDetails';
+import {
   Users, 
   TrendingUp, 
   MessageCircle, 
@@ -12,88 +16,13 @@ import {
   Globe,
   Rocket
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const Services = () => {
-  const allServices = [
-    {
-      icon: Users,
-      title: 'Community Building',
-      description: 'Build engaged, passionate communities that drive your project forward with authentic connections.',
-      features: ['Discord/Telegram Setup', 'Community Management', 'Ambassador Programs', 'Engagement Strategies'],
-      gradient: 'from-gradient-start to-gradient-end',
-    },
-    {
-      icon: TrendingUp,
-      title: 'Growth Marketing',
-      description: 'Data-driven strategies that scale your project sustainably across all channels.',
-      features: ['Performance Marketing', 'KOL Partnerships', 'Influencer Outreach', 'Growth Hacking'],
-      gradient: 'from-gradient-end to-accent-pink',
-    },
-    {
-      icon: MessageCircle,
-      title: 'Content Strategy',
-      description: 'Compelling narratives that resonate with your target audience and drive action.',
-      features: ['Content Creation', 'Blog Writing', 'Video Production', 'Social Media Content'],
-      gradient: 'from-accent-pink to-gradient-start',
-    },
-    {
-      icon: Target,
-      title: 'Launch Strategy',
-      description: 'End-to-end support for successful token and project launches.',
-      features: ['Go-to-Market Strategy', 'Launch Planning', 'PR & Media', 'Launch Execution'],
-      gradient: 'from-gradient-start to-gradient-end',
-    },
-    {
-      icon: Coins,
-      title: 'Tokenomics Design',
-      description: 'Sustainable token economies that align incentives perfectly.',
-      features: ['Token Design', 'Economic Modeling', 'Incentive Structures', 'Governance Design'],
-      gradient: 'from-gradient-end to-accent-pink',
-    },
-    {
-      icon: BarChart3,
-      title: 'Analytics & Insights',
-      description: 'Deep data analysis to optimize performance and maximize ROI.',
-      features: ['Performance Analytics', 'Market Research', 'Competitive Analysis', 'ROI Tracking'],
-      gradient: 'from-accent-pink to-gradient-start',
-    },
-    {
-      icon: Megaphone,
-      title: 'PR & Media Relations',
-      description: 'Strategic media coverage and thought leadership positioning.',
-      features: ['Press Release', 'Media Outreach', 'Thought Leadership', 'Crisis Management'],
-      gradient: 'from-gradient-start to-gradient-end',
-    },
-    {
-      icon: Shield,
-      title: 'Reputation Management',
-      description: 'Protect and enhance your project\'s reputation in the Web3 space.',
-      features: ['Online Reputation', 'Crisis Response', 'Brand Protection', 'Community Moderation'],
-      gradient: 'from-gradient-end to-accent-pink',
-    },
-    {
-      icon: Zap,
-      title: 'Performance Optimization',
-      description: 'Continuous optimization of marketing performance and user acquisition.',
-      features: ['Conversion Optimization', 'A/B Testing', 'Funnel Analysis', 'User Experience'],
-      gradient: 'from-accent-pink to-gradient-start',
-    },
-    {
-      icon: Globe,
-      title: 'Global Expansion',
-      description: 'Scale your project internationally with localized marketing strategies.',
-      features: ['Market Entry', 'Localization', 'Regional Partnerships', 'Cultural Adaptation'],
-      gradient: 'from-gradient-start to-gradient-end',
-    },
-    {
-      icon: Rocket,
-      title: 'Strategic Consulting',
-      description: 'High-level strategic guidance for complex Web3 marketing challenges.',
-      features: ['Strategy Development', 'Market Analysis', 'Competitive Positioning', 'Growth Planning'],
-      gradient: 'from-gradient-end to-accent-pink',
-    },
-  ];
+  // Dynamic icon mapping
+  const iconMap: { [key: string]: any } = {
+    Users, TrendingUp, MessageCircle, Target, Coins,
+    BarChart3, Megaphone, Shield, Zap, Globe, Rocket
+  };
 
   return (
     <main className="min-h-screen pt-20">
@@ -109,10 +38,26 @@ const Services = () => {
             <h1 className="text-5xl lg:text-6xl font-bold mb-6">
               <span className="gradient-text">Comprehensive</span> Web3 marketing services
             </h1>
-            <p className="text-xl text-text-secondary leading-relaxed">
+            <p className="text-xl text-text-secondary leading-relaxed mb-8">
               From strategy to execution, we provide end-to-end marketing solutions 
               designed to drive real growth for your Web3 project.
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                variant="hero" 
+                size="xl"
+                onClick={() => handleNavigation('/contact')}
+              >
+                Get Custom Strategy
+              </Button>
+              <Button 
+                variant="outline-glow" 
+                size="xl"
+                onClick={() => handleNavigation('/case-studies')}
+              >
+                See Results
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -136,8 +81,8 @@ const Services = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allServices.map((service, index) => {
-              const IconComponent = service.icon;
+            {SERVICES_DATA.map((service, index) => {
+              const IconComponent = iconMap[service.icon];
               return (
                 <motion.div
                   key={service.title}
@@ -145,7 +90,8 @@ const Services = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.05 }}
-                  className="group"
+                  className="group cursor-pointer"
+                  onClick={() => handleNavigation('/contact')}
                 >
                   <div className="bg-surface border border-border rounded-xl p-8 h-full card-glow group-hover:border-gradient-start/30 transition-all duration-300">
                     <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${service.gradient} rounded-lg mb-6`}>
@@ -176,8 +122,11 @@ const Services = () => {
         </div>
       </section>
 
+      {/* Service Packages */}
+      <ServiceDetails />
+
       {/* CTA Section */}
-      <section className="section-padding bg-surface/50">
+      <section className="section-padding bg-background">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -192,10 +141,18 @@ const Services = () => {
               Let's discuss your project's unique needs and create a custom strategy that delivers results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="xl">
+              <Button 
+                variant="hero" 
+                size="xl"
+                onClick={() => handleNavigation('/contact')}
+              >
                 Book a Strategy Call
               </Button>
-              <Button variant="outline-glow" size="xl">
+              <Button 
+                variant="outline-glow" 
+                size="xl"
+                onClick={() => handleNavigation('/case-studies')}
+              >
                 View Case Studies
               </Button>
             </div>
