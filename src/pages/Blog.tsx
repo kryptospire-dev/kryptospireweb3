@@ -4,10 +4,13 @@ import { Calendar, Clock, ArrowRight, Search, BookOpen, TrendingUp, BarChart, Us
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import BlogDialog from '../components/sections/BlogDialog'; // Import the BlogDialog component
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const categories = ['All', 'Strategy', 'Community', 'NFTs', 'DeFi', 'DAOs', 'Content', 'Analytics'];
 
@@ -98,6 +101,18 @@ const Blog = () => {
     }
   ];
 
+  // Function to handle opening blog dialog
+  const handleReadMore = (blogPost) => {
+    setSelectedBlog(blogPost);
+    setIsDialogOpen(true);
+  };
+
+  // Function to handle closing blog dialog
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setSelectedBlog(null);
+  };
+
   // Filter posts based on category and search term
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = activeCategory === 'All' || post.category === activeCategory;
@@ -159,6 +174,17 @@ const Blog = () => {
         type: "spring",
         stiffness: 400,
         damping: 25
+      }
+    }
+  };
+
+  const iconFloatVariants = {
+    animate: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
       }
     }
   };
@@ -351,7 +377,11 @@ const Blog = () => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          <Button variant="outline-glow" className="group">
+                          <Button 
+                            variant="outline-glow" 
+                            className="group"
+                            onClick={() => handleReadMore(featuredPost)}
+                          >
                             Read More
                             <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
                           </Button>
@@ -445,7 +475,12 @@ const Blog = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >
-                            <Button variant="ghost" size="sm" className="group p-0 h-auto">
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="group p-0 h-auto"
+                              onClick={() => handleReadMore(post)}
+                            >
                               Read More
                               <ArrowRight className="ml-1 group-hover:translate-x-1 transition-transform" size={14} />
                             </Button>
@@ -574,6 +609,13 @@ const Blog = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Blog Dialog */}
+      <BlogDialog 
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+        blogPost={selectedBlog}
+      />
     </main>
   );
 };
