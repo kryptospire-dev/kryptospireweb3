@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { NAVIGATION_ITEMS } from '@/constants/data';
 import { handleNavigation, openCalendlyModal } from '@/utils/navigation';
 import { motion } from 'framer-motion';
