@@ -16,8 +16,8 @@ const Home = () => {
       <WhyChooseUs />
       <StatsSection />
       <ProcessSection />
-      <TestimonialsSection />
       <BlogHighlights />
+      <TestimonialsSection />
     </main>
   );
 };

@@ -1,17 +1,59 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { useRef, useEffect, useState } from 'react';
 
 const Hero = () => {
   const navigate = useNavigate();
+  const statsRef = useRef(null);
+  const isInView = useInView(statsRef, { once: true });
+  
+  const [counts, setCounts] = useState({
+    projects: 0,
+    marketCap: 0,
+    members: 0
+  });
+
+  const stats = [
+    { key: 'projects', number: 150, label: 'Projects Launched', suffix: '+' },
+    { key: 'marketCap', number: 2.1, label: 'Market Cap Driven', prefix: '$', suffix: 'B+' },
+    { key: 'members', number: 5, label: 'Community Members', suffix: 'M+' },
+  ];
+
+  // Animated counter function
+  useEffect(() => {
+    if (isInView) {
+      stats.forEach(stat => {
+        let start = 0;
+        const end = stat.number;
+        const duration = 2000; // 2 seconds
+        const increment = end / (duration / 16); // 60fps
+
+        const counter = setInterval(() => {
+          start += increment;
+          if (start >= end) {
+            start = end;
+            clearInterval(counter);
+          }
+          
+          setCounts(prev => ({
+            ...prev,
+            [stat.key]: start
+          }));
+        }, 16);
+      });
+    }
+  }, [isInView]);
 
   const handleBookCall = () => {
     navigate('/contact');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleViewCaseStudies = () => {
     navigate('/case-studies');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -24,19 +66,6 @@ const Hero = () => {
 
       <div className="container-custom relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center px-4 py-2 bg-surface border border-border rounded-full mb-8"
-          >
-            <div className="w-2 h-2 bg-gradient-start rounded-full mr-3 animate-pulse" />
-            <span className="text-sm text-text-secondary font-medium">
-              Trusted by 150+ Web3 projects worldwide
-            </span>
-          </motion.div>
-
           {/* Main Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -76,21 +105,22 @@ const Hero = () => {
             </Button>
           </motion.div>
 
-          {/* Stats */}
+          {/* Animated Stats */}
           <motion.div
+            ref={statsRef}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto"
           >
-            {[
-              { number: '150+', label: 'Projects Launched' },
-              { number: '$2.1B+', label: 'Market Cap Driven' },
-              { number: '5M+', label: 'Community Members' },
-            ].map((stat, index) => (
+            {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl lg:text-4xl font-bold gradient-text mb-2">
-                  {stat.number}
+                  {stat.prefix}
+                  {stat.key === 'projects' ? Math.round(counts.projects) : 
+                   stat.key === 'marketCap' ? counts.marketCap.toFixed(1) :
+                   Math.round(counts.members)}
+                  {stat.suffix}
                 </div>
                 <div className="text-text-secondary text-sm font-medium">
                   {stat.label}
@@ -101,16 +131,21 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Enhanced Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-3 left-1/2 transform -translate-x-1/2 cursor-pointer"
+        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
       >
-        <div className="flex flex-col items-center text-text-muted">
-          <span className="text-xs mb-2 font-medium">Scroll to explore</span>
-          <div className="w-px h-8 bg-gradient-to-b from-gradient-start to-transparent" />
+        <div className="flex flex-col items-center text-text-muted hover:text-gradient-start transition-colors">
+          <span className="text-xs mb-2 font-bold">Scroll to explore</span>
+          <motion.div 
+            className="w-px h-8 bg-gradient-to-b from-gradient-start to-transparent"
+            animate={{ scaleY: [1, 1.5, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
       </motion.div>
     </section>

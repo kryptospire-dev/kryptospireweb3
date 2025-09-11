@@ -11,16 +11,16 @@ const TrustedBy = () => {
   ];
 
   return (
-    <section className="section-padding bg-surface/50">
+    <section className="py-20 bg-surface/50">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center"
         >
-          <p className="text-text-secondary font-medium mb-8">
+          <p className="text-text-secondary font-medium mb-6">
             Trusted by leading Web3 projects
           </p>
           
