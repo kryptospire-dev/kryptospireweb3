@@ -101,21 +101,7 @@ export const SERVICES_DATA = [
     description: 'Continuous optimization of marketing performance and user acquisition.',
     features: ['Conversion Optimization', 'A/B Testing', 'Funnel Analysis', 'User Experience'],
     gradient: 'from-accent-pink to-gradient-start',
-  },
-  {
-    icon: 'Globe',
-    title: 'Global Expansion',
-    description: 'Scale your project internationally with localized marketing strategies.',
-    features: ['Market Entry', 'Localization', 'Regional Partnerships', 'Cultural Adaptation'],
-    gradient: 'from-gradient-start to-gradient-end',
-  },
-  {
-    icon: 'Rocket',
-    title: 'Strategic Consulting',
-    description: 'High-level strategic guidance for complex Web3 marketing challenges.',
-    features: ['Strategy Development', 'Market Analysis', 'Competitive Positioning', 'Growth Planning'],
-    gradient: 'from-gradient-end to-accent-pink',
-  },
+  }
 ];
 
 export const WHY_CHOOSE_US = [

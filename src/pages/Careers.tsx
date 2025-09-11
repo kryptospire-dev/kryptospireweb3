@@ -6,6 +6,154 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
 const Careers = () => {
+  // Professional animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 25,
+      scale: 0.96,
+      rotateX: 10
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      rotateX: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.215, 0.61, 0.355, 1],
+        type: "spring",
+        stiffness: 120,
+        damping: 15
+      }
+    }
+  };
+
+  const cardHoverVariants = {
+    initial: { 
+      y: 0,
+      scale: 1,
+      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)"
+    },
+    hover: { 
+      y: -6,
+      scale: 1.02,
+      boxShadow: "0 25px 50px rgba(59, 130, 246, 0.15)",
+      transition: {
+        type: "spring",
+        stiffness: 350,
+        damping: 20
+      }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { scale: 0.7, opacity: 0, rotate: -15 },
+    visible: { 
+      scale: 1, 
+      opacity: 1,
+      rotate: 0,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 15,
+        delay: 0.2
+      }
+    },
+    hover: {
+      scale: 1.1,
+      rotate: 5,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 15
+      }
+    }
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.4,
+        delay: 0.3
+      }
+    },
+    hover: {
+      scale: 1.04,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 25
+      }
+    },
+    tap: {
+      scale: 0.96,
+      transition: {
+        duration: 0.1
+      }
+    }
+  };
+
+  const formFieldVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: (i) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.4,
+        delay: i * 0.1
+      }
+    })
+  };
+
+  const requirementVariants = {
+    hidden: { opacity: 0, x: -15 },
+    visible: (i) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.3,
+        delay: 0.4 + (i * 0.05)
+      }
+    })
+  };
+
+  const floatingVariants = {
+    animate: {
+      y: [0, -8, 0],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const pulseVariants = {
+    animate: {
+      scale: [1, 1.02, 1],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   const benefits = [
     {
       icon: Users,
@@ -135,30 +283,64 @@ const Careers = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-              Build the <span className="gradient-text">future</span> of Web3 with us
-            </h1>
-            <p className="text-xl text-text-secondary leading-relaxed mb-8">
+            <motion.h1 
+              className="text-5xl lg:text-6xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              Build the <motion.span 
+                className="gradient-text"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+              >
+                future
+              </motion.span> of Web3 with us
+            </motion.h1>
+            <motion.p 
+              className="text-xl text-text-secondary leading-relaxed mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               Join a world-class team of Web3 marketing experts who are passionate about 
               building authentic communities and driving real growth for revolutionary projects.
-            </p>
-            <div className="flex items-center justify-center gap-8 text-sm text-text-secondary">
-              <div className="flex items-center">
+            </motion.p>
+            <motion.div 
+              className="flex items-center justify-center gap-8 text-sm text-text-secondary"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <motion.div 
+                className="flex items-center"
+                whileHover={{ scale: 1.05, color: "#3b82f6" }}
+                transition={{ duration: 0.2 }}
+              >
                 <Users className="mr-2 text-gradient-start" size={16} />
                 <span>Remote-First Team</span>
-              </div>
-              <div className="flex items-center">
+              </motion.div>
+              <motion.div 
+                className="flex items-center"
+                whileHover={{ scale: 1.05, color: "#3b82f6" }}
+                transition={{ duration: 0.2 }}
+              >
                 <Globe className="mr-2 text-gradient-start" size={16} />
                 <span>15+ Countries</span>
-              </div>
-              <div className="flex items-center">
+              </motion.div>
+              <motion.div 
+                className="flex items-center"
+                whileHover={{ scale: 1.05, color: "#3b82f6" }}
+                transition={{ duration: 0.2 }}
+              >
                 <Heart className="mr-2 text-gradient-start" size={16} />
                 <span>4.9/5 Employee Rating</span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -170,44 +352,92 @@ const Careers = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <motion.h2 
+              className="text-4xl lg:text-5xl font-bold mb-6"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+            >
               Why <span className="gradient-text">KryptoSpire?</span>
-            </h2>
-            <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-text-secondary max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
               We offer more than just a job—we provide a platform to shape the future 
               of decentralized marketing while growing your career.
-            </p>
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
               return (
                 <motion.div
                   key={benefit.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group"
+                  variants={cardVariants}
+                  className="group h-full"
                 >
-                  <div className="bg-surface border border-border rounded-xl p-8 h-full card-glow group-hover:border-gradient-start/30 transition-all duration-300">
-                    <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${benefit.gradient} rounded-lg mb-6`}>
-                      <IconComponent className="text-white" size={24} />
+                  <motion.div 
+                    className="bg-surface border border-border rounded-xl p-8 h-full card-glow group-hover:border-gradient-start/30 transition-all duration-300 relative overflow-hidden"
+                    variants={cardHoverVariants}
+                    initial="initial"
+                    whileHover="hover"
+                  >
+                    {/* Subtle background gradient on hover */}
+                    <motion.div
+                      className={`absolute inset-0 bg-gradient-to-br ${benefit.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                      initial={false}
+                    />
+                    
+                    <div className="relative z-10">
+                      <motion.div 
+                        className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${benefit.gradient} rounded-lg mb-6`}
+                        variants={iconVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        whileHover="hover"
+                        viewport={{ once: true }}
+                      >
+                        <IconComponent className="text-white" size={24} />
+                      </motion.div>
+                      <motion.h3 
+                        className="text-xl font-semibold text-text-primary mb-4 group-hover:gradient-text transition-all duration-300"
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: 0.3 }}
+                      >
+                        {benefit.title}
+                      </motion.h3>
+                      <motion.p 
+                        className="text-text-secondary leading-relaxed"
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: 0.4 }}
+                      >
+                        {benefit.description}
+                      </motion.p>
                     </div>
-                    <h3 className="text-xl font-semibold text-text-primary mb-4 group-hover:gradient-text transition-all duration-300">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-text-secondary leading-relaxed">
-                      {benefit.description}
-                    </p>
-                  </div>
+                  </motion.div>
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -218,75 +448,166 @@ const Careers = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <motion.h2 
+              className="text-4xl lg:text-5xl font-bold mb-6"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+            >
               <span className="gradient-text">Open positions</span>
-            </h2>
-            <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-text-secondary max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
               Find your perfect role and join our mission to build the future of Web3 marketing.
-            </p>
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             {openRoles.map((role, index) => (
               <motion.div
                 key={role.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group"
+                variants={cardVariants}
+                className="group h-full"
               >
-                <Card className="bg-background border-border hover:border-gradient-start/30 transition-all duration-300 h-full">
-                  <CardHeader>
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-semibold text-text-primary group-hover:gradient-text transition-all duration-300 mb-2">
-                          {role.title}
-                        </h3>
-                        <div className="flex items-center gap-4 text-sm text-text-secondary">
-                          <span className="px-2 py-1 bg-gradient-start/10 border border-gradient-start/20 rounded text-gradient-start">
-                            {role.department}
-                          </span>
-                          <div className="flex items-center">
-                            <MapPin size={14} className="mr-1" />
-                            {role.location}
-                          </div>
-                          <div className="flex items-center">
-                            <Clock size={14} className="mr-1" />
-                            {role.type}
-                          </div>
+                <motion.div
+                  variants={cardHoverVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  className="h-full"
+                >
+                  <Card className="bg-background border-border hover:border-gradient-start/30 transition-all duration-300 h-full flex flex-col">
+                    <CardHeader className="flex-1">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex-1">
+                          <motion.h3 
+                            className="text-xl font-semibold text-text-primary group-hover:gradient-text transition-all duration-300 mb-2"
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3, delay: 0.2 }}
+                          >
+                            {role.title}
+                          </motion.h3>
+                          <motion.div 
+                            className="flex items-center gap-4 text-sm text-text-secondary flex-wrap"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3, delay: 0.3 }}
+                          >
+                            <motion.span 
+                              className="px-2 py-1 bg-gradient-start/10 border border-gradient-start/20 rounded text-gradient-start"
+                              whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.2)" }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {role.department}
+                            </motion.span>
+                            <div className="flex items-center">
+                              <MapPin size={14} className="mr-1" />
+                              {role.location}
+                            </div>
+                            <div className="flex items-center">
+                              <Clock size={14} className="mr-1" />
+                              {role.type}
+                            </div>
+                          </motion.div>
                         </div>
                       </div>
-                    </div>
-                    <p className="text-text-secondary leading-relaxed mb-6">
-                      {role.description}
-                    </p>
-                  </CardHeader>
+                      <motion.p 
+                        className="text-text-secondary leading-relaxed mb-6"
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: 0.4 }}
+                      >
+                        {role.description}
+                      </motion.p>
+                    </CardHeader>
 
-                  <CardContent className="space-y-6">
-                    <div>
-                      <h4 className="font-semibold text-text-primary mb-3">Requirements:</h4>
-                      <ul className="space-y-2">
-                        {role.requirements.map((req, reqIndex) => (
-                          <li key={reqIndex} className="flex items-start text-sm text-text-secondary">
-                            <div className="w-1.5 h-1.5 bg-gradient-start rounded-full mr-3 mt-2 flex-shrink-0" />
-                            {req}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <CardContent className="space-y-6">
+                      <div>
+                        <motion.h4 
+                          className="font-semibold text-text-primary mb-3"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: 0.5 }}
+                        >
+                          Requirements:
+                        </motion.h4>
+                        <ul className="space-y-2">
+                          {role.requirements.map((req, reqIndex) => (
+                            <motion.li 
+                              key={reqIndex} 
+                              className="flex items-start text-sm text-text-secondary"
+                              variants={requirementVariants}
+                              initial="hidden"
+                              whileInView="visible"
+                              viewport={{ once: true }}
+                              custom={reqIndex}
+                            >
+                              <motion.div 
+                                className="w-1.5 h-1.5 bg-gradient-start rounded-full mr-3 mt-2 flex-shrink-0"
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ 
+                                  duration: 0.3, 
+                                  delay: 0.6 + (reqIndex * 0.05),
+                                  type: "spring",
+                                  stiffness: 300
+                                }}
+                              />
+                              {req}
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
 
-                    <Button variant="outline-glow" className="w-full group">
-                      Apply Now
-                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
-                    </Button>
-                  </CardContent>
-                </Card>
+                      <motion.div
+                        variants={buttonVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        whileHover="hover"
+                        whileTap="tap"
+                        viewport={{ once: true }}
+                      >
+                        <Button variant="outline-glow" className="w-full group">
+                          Apply Now
+                          <motion.div
+                            className="ml-2"
+                            animate={{ x: [0, 3, 0] }}
+                            transition={{ 
+                              duration: 1.5, 
+                              repeat: Infinity,
+                              ease: "easeInOut"
+                            }}
+                          >
+                            <ArrowRight size={16} />
+                          </motion.div>
+                        </Button>
+                      </motion.div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -297,37 +618,78 @@ const Careers = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <motion.h2 
+              className="text-4xl lg:text-5xl font-bold mb-6"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+            >
               Our <span className="gradient-text">culture</span>
-            </h2>
-            <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-text-secondary max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
               The values that guide how we work, collaborate, and grow together as a team.
-            </p>
+            </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             {cultureValues.map((value, index) => (
               <motion.div
                 key={value.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group"
+                variants={cardVariants}
+                className="group h-full"
               >
-                <div className="bg-surface border border-border rounded-xl p-8 h-full card-glow group-hover:border-gradient-start/30 transition-all duration-300">
-                  <h3 className="text-xl font-semibold text-text-primary mb-4 group-hover:gradient-text transition-all duration-300">
-                    {value.title}
-                  </h3>
-                  <p className="text-text-secondary leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
+                <motion.div 
+                  className="bg-surface border border-border rounded-xl p-8 h-full card-glow group-hover:border-gradient-start/30 transition-all duration-300 relative overflow-hidden"
+                  variants={cardHoverVariants}
+                  initial="initial"
+                  whileHover="hover"
+                >
+                  {/* Subtle background glow on hover */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-gradient-start/3 to-gradient-end/3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={false}
+                  />
+                  
+                  <div className="relative z-10">
+                    <motion.h3 
+                      className="text-xl font-semibold text-text-primary mb-4 group-hover:gradient-text transition-all duration-300"
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.2 }}
+                    >
+                      {value.title}
+                    </motion.h3>
+                    <motion.p 
+                      className="text-text-secondary leading-relaxed"
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: 0.3 }}
+                    >
+                      {value.description}
+                    </motion.p>
+                  </div>
+                </motion.div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -338,68 +700,130 @@ const Careers = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="max-w-2xl mx-auto"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              <motion.h2 
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+              >
                 Don't see your <span className="gradient-text">perfect role?</span>
-              </h2>
-              <p className="text-xl text-text-secondary">
+              </motion.h2>
+              <motion.p 
+                className="text-xl text-text-secondary"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
                 We're always looking for exceptional talent. Send us your information 
                 and let's start a conversation about your future with KryptoSpire.
-              </p>
+              </motion.p>
             </div>
 
-            <Card className="bg-background border-border">
-              <CardContent className="p-8">
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-text-primary mb-2">
-                        First Name
-                      </label>
-                      <Input className="bg-surface border-border focus:border-gradient-start" />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <Card className="bg-background border-border">
+                <CardContent className="p-8">
+                  <form className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <motion.div
+                        variants={formFieldVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={0}
+                      >
+                        <label className="block text-sm font-medium text-text-primary mb-2">
+                          First Name
+                        </label>
+                        <Input className="bg-surface border-border focus:border-gradient-start transition-all duration-300" />
+                      </motion.div>
+                      <motion.div
+                        variants={formFieldVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={1}
+                      >
+                        <label className="block text-sm font-medium text-text-primary mb-2">
+                          Last Name
+                        </label>
+                        <Input className="bg-surface border-border focus:border-gradient-start transition-all duration-300" />
+                      </motion.div>
                     </div>
-                    <div>
+                    
+                    <motion.div
+                      variants={formFieldVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      custom={3}
+                    >
                       <label className="block text-sm font-medium text-text-primary mb-2">
-                        Last Name
+                        Role of Interest
                       </label>
-                      <Input className="bg-surface border-border focus:border-gradient-start" />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">
-                      Email Address
-                    </label>
-                    <Input type="email" className="bg-surface border-border focus:border-gradient-start" />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">
-                      Role of Interest
-                    </label>
-                    <Input className="bg-surface border-border focus:border-gradient-start" />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">
-                      Tell us about yourself
-                    </label>
-                    <Textarea 
-                      rows={6}
-                      className="bg-surface border-border focus:border-gradient-start resize-none"
-                      placeholder="Tell us about your experience, what excites you about Web3, and why you'd like to join KryptoSpire..."
-                    />
-                  </div>
+                      <Input className="bg-surface border-border focus:border-gradient-start transition-all duration-300" />
+                    </motion.div>
+                    
+                    <motion.div
+                      variants={formFieldVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      custom={4}
+                    >
+                      <label className="block text-sm font-medium text-text-primary mb-2">
+                        Tell us about yourself
+                      </label>
+                      <Textarea 
+                        rows={6}
+                        className="bg-surface border-border focus:border-gradient-start resize-none transition-all duration-300"
+                        placeholder="Tell us about your experience, what excites you about Web3, and why you'd like to join KryptoSpire..."
+                      />
+                    </motion.div>
 
-                  <Button variant="hero" size="lg" className="w-full group">
-                    <Send className="mr-2 group-hover:translate-x-1 transition-transform" size={16} />
-                    Send Application
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                    <motion.div
+                      variants={buttonVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      whileHover="hover"
+                      whileTap="tap"
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <Button variant="hero" size="lg" className="w-full group">
+                        <motion.div
+                          className="mr-2"
+                          animate={{ x: [0, 3, 0] }}
+                          transition={{ 
+                            duration: 2, 
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        >
+                          <Send size={16} />
+                        </motion.div>
+                        <motion.span
+                          variants={pulseVariants}
+                          animate="animate"
+                        >
+                          Send Application
+                        </motion.span>
+                      </Button>
+                    </motion.div>
+                  </form>
+                </CardContent>
+              </Card>
+            </motion.div>
           </motion.div>
         </div>
       </section>
