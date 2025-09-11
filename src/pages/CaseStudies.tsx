@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const CaseStudies = () => {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('All');
 
   const filters = ['All', 'DeFi', 'NFTs', 'DAOs', 'GameFi', 'Infrastructure'];
@@ -295,12 +296,12 @@ const CaseStudies = () => {
               Join the 150+ Web3 projects that have achieved extraordinary results with KryptoSpire.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="xl">
+              <Button variant="hero" size="xl" onClick={() => navigate('/contact')}>
                 Book a Strategy Call
               </Button>
-              <Button variant="outline-glow" size="xl">
+              <Button variant="outline-glow" size="xl" onClick={() => navigate(`/case-studies/${caseStudies[0].id}`)}>
                 <ExternalLink className="mr-2" size={16} />
-                Download Case Study Pack
+                View Full Case Studies
               </Button>
             </div>
           </motion.div>

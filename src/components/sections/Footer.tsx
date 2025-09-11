@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Twitter, Linkedin, Github, Mail } from 'lucide-react';
 
 const Footer = () => {
+  const navigate = useNavigate();
   const companyLinks = [
     { name: 'About', href: '/about' },
     { name: 'Careers', href: '/careers' },
@@ -110,7 +111,10 @@ const Footer = () => {
               <p className="text-text-secondary">
                 Ready to scale your Web3 project? Let's talk.
               </p>
-              <button className="btn-gradient px-6 py-2 rounded-lg font-semibold text-white text-sm hover:shadow-glow-primary transition-all duration-300">
+              <button 
+                onClick={() => navigate('/contact')}
+                className="btn-gradient px-6 py-2 rounded-lg font-semibold text-white text-sm hover:shadow-glow-primary transition-all duration-300"
+              >
                 Book a Call
               </button>
             </div>

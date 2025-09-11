@@ -12,6 +12,13 @@ import CaseStudies from "./pages/CaseStudies";
 import Blog from "./pages/Blog";
 import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
+import CaseStudyDetail from "./pages/CaseStudyDetail";
+import BlogPost from "./pages/BlogPost";
+import ServiceDetail from "./pages/ServiceDetail";
+import JobApplication from "./pages/JobApplication";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import CookiePolicy from "./pages/CookiePolicy";
 
 const queryClient = new QueryClient();
 
@@ -26,10 +33,17 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/services/:service" element={<ServiceDetail />} />
             <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/careers/apply/:id" element={<JobApplication />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/cookies" element={<CookiePolicy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -53,6 +53,7 @@ const Navigation = () => {
                     ? 'text-gradient-start'
                     : 'text-text-secondary'
                 }`}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 {item.name}
               </Link>
@@ -94,7 +95,10 @@ const Navigation = () => {
                       ? 'text-gradient-start'
                       : 'text-text-secondary'
                   }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                 >
                   {item.name}
                 </Link>

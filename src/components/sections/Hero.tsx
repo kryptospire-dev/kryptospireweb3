@@ -1,8 +1,19 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleBookCall = () => {
+    navigate('/contact');
+  };
+
+  const handleViewCaseStudies = () => {
+    navigate('/case-studies');
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-surface">
       {/* Background glow effects */}
@@ -55,11 +66,11 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
-            <Button variant="hero" size="xl" className="group">
+            <Button variant="hero" size="xl" className="group" onClick={handleBookCall}>
               Start Your Growth Journey
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
             </Button>
-            <Button variant="outline-glow" size="xl" className="group">
+            <Button variant="outline-glow" size="xl" className="group" onClick={handleViewCaseStudies}>
               <Play className="mr-2 group-hover:scale-110 transition-transform" size={16} />
               Watch Case Studies
             </Button>

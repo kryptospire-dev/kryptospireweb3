@@ -6,7 +6,6 @@ import StatsSection from '@/components/sections/StatsSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
 import BlogHighlights from '@/components/sections/BlogHighlights';
-import FinalCTA from '@/components/sections/FinalCTA';
 
 const Home = () => {
   return (
@@ -19,7 +18,6 @@ const Home = () => {
       <ProcessSection />
       <TestimonialsSection />
       <BlogHighlights />
-      <FinalCTA />
     </main>
   );
 };
