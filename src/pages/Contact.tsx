@@ -26,8 +26,15 @@ const Contact = () => {
     message: ''
   });
 
-  const iconMap: { [key: string]: any } = {
-    Mail, Phone, MapPin, Clock
+  // Get icon component based on name
+  const getIconComponent = (iconName: string) => {
+    switch (iconName) {
+      case 'Mail': return Mail;
+      case 'Phone': return Phone;
+      case 'MapPin': return MapPin;
+      case 'Clock': return Clock;
+      default: return Mail;
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -162,7 +169,7 @@ const Contact = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {CONTACT_INFO.map((info, index) => {
-                  const IconComponent = iconMap[info.icon];
+                  const IconComponent = getIconComponent(info.icon);
                   return (
                     <motion.div
                       key={info.title}

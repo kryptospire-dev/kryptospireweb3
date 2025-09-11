@@ -111,14 +111,24 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {ABOUT_DATA.values.map((value, index) => {
-              // Dynamic icon mapping
-              const iconMap: { [key: string]: any } = {
-                Target,
-                Award,
-                Users,
-                Heart,
-              };
-              const IconComponent = iconMap[value.icon];
+              // Get the correct icon component
+              let IconComponent;
+              switch (value.icon) {
+                case 'Target':
+                  IconComponent = Target;
+                  break;
+                case 'Award':
+                  IconComponent = Award;
+                  break;
+                case 'Users':
+                  IconComponent = Users;
+                  break;
+                case 'Heart':
+                  IconComponent = Heart;
+                  break;
+                default:
+                  IconComponent = Target;
+              }
               
               return (
                 <motion.div

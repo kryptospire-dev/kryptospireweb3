@@ -18,10 +18,22 @@ import {
 } from 'lucide-react';
 
 const Services = () => {
-  // Dynamic icon mapping
-  const iconMap: { [key: string]: any } = {
-    Users, TrendingUp, MessageCircle, Target, Coins,
-    BarChart3, Megaphone, Shield, Zap, Globe, Rocket
+  // Get icon component based on name
+  const getIconComponent = (iconName: string) => {
+    switch (iconName) {
+      case 'Users': return Users;
+      case 'TrendingUp': return TrendingUp;
+      case 'MessageCircle': return MessageCircle;
+      case 'Target': return Target;
+      case 'Coins': return Coins;
+      case 'BarChart3': return BarChart3;
+      case 'Megaphone': return Megaphone;
+      case 'Shield': return Shield;
+      case 'Zap': return Zap;
+      case 'Globe': return Globe;
+      case 'Rocket': return Rocket;
+      default: return Users;
+    }
   };
 
   return (
@@ -82,7 +94,7 @@ const Services = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {SERVICES_DATA.map((service, index) => {
-              const IconComponent = iconMap[service.icon];
+              const IconComponent = getIconComponent(service.icon);
               return (
                 <motion.div
                   key={service.title}
