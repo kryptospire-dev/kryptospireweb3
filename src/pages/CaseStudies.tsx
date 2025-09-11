@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ArrowRight, ExternalLink, TrendingUp, Users, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const CaseStudies = () => {
@@ -101,6 +102,35 @@ const CaseStudies = () => {
     ? caseStudies 
     : caseStudies.filter(study => study.category === activeFilter);
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      scale: 0.95
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <main className="min-h-screen pt-20">
       {/* Hero Section */}
@@ -119,20 +149,37 @@ const CaseStudies = () => {
               Discover how we've helped Web3 projects achieve extraordinary growth, 
               build thriving communities, and create lasting impact in the decentralized ecosystem.
             </p>
-            <div className="flex items-center justify-center gap-8 text-sm text-text-secondary">
-              <div className="flex items-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex items-center justify-center gap-8 text-sm text-text-secondary"
+            >
+              <motion.div 
+                className="flex items-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <TrendingUp className="mr-2 text-gradient-start" size={16} />
                 <span>$2.1B+ Market Cap Driven</span>
-              </div>
-              <div className="flex items-center">
+              </motion.div>
+              <motion.div 
+                className="flex items-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <Users className="mr-2 text-gradient-start" size={16} />
                 <span>5M+ Community Members</span>
-              </div>
-              <div className="flex items-center">
+              </motion.div>
+              <motion.div 
+                className="flex items-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <DollarSign className="mr-2 text-gradient-start" size={16} />
                 <span>150+ Projects Launched</span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -146,9 +193,18 @@ const CaseStudies = () => {
             viewport={{ once: true }}
             className="flex flex-wrap justify-center gap-4 mb-16"
           >
-            {filters.map((filter) => (
-              <button
+            {filters.map((filter, index) => (
+              <motion.button
                 key={filter}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveFilter(filter)}
                 className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
                   activeFilter === filter
@@ -157,33 +213,52 @@ const CaseStudies = () => {
                 }`}
               >
                 {filter}
-              </button>
+              </motion.button>
             ))}
           </motion.div>
 
           {/* Case Studies Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredStudies.map((study, index) => (
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {filteredStudies.map((study) => (
               <motion.div
                 key={study.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                variants={cardVariants}
+                whileHover={{ 
+                  y: -8,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
                 className="group"
               >
-                <Card className="bg-surface border-border hover:border-gradient-start/30 transition-all duration-300 overflow-hidden h-full">
+                <Card className="bg-surface border-border hover:border-gradient-start/30 transition-all duration-300 overflow-hidden h-full flex flex-col">
                   <div className="relative aspect-video bg-gradient-to-br from-surface to-background">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${study.gradient} opacity-20`} />
+                    <motion.div 
+                      className={`absolute inset-0 bg-gradient-to-br ${study.gradient} opacity-20`}
+                      whileHover={{ opacity: 0.3 }}
+                      transition={{ duration: 0.3 }}
+                    />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-6xl font-orbitron font-bold text-white/20">
+                      <motion.div 
+                        className="text-6xl font-orbitron font-bold text-white/20"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
                         {study.category}
-                      </div>
+                      </motion.div>
                     </div>
                     <div className="absolute top-4 right-4">
-                      <span className="bg-background/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gradient-start border border-gradient-start/20">
+                      <motion.span 
+                        className="bg-background/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gradient-start border border-gradient-start/20"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
                         {study.category}
-                      </span>
+                      </motion.span>
                     </div>
                   </div>
                   
@@ -196,42 +271,54 @@ const CaseStudies = () => {
                     </p>
                   </CardHeader>
 
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-6 flex-1 flex flex-col">
                     {/* Results */}
                     <div className="grid grid-cols-3 gap-4">
-                      {Object.entries(study.results).map(([key, value]) => (
-                        <div key={key} className="text-center">
+                      {Object.entries(study.results).map(([key, value], index) => (
+                        <motion.div 
+                          key={key} 
+                          className="text-center"
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ type: "spring", stiffness: 300, delay: index * 0.1 }}
+                        >
                           <div className="text-lg font-bold gradient-text">{value}</div>
                           <div className="text-xs text-text-secondary capitalize">{key}</div>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {study.tags.map((tag) => (
-                        <span
+                    <div className="flex flex-wrap gap-2 flex-1">
+                      {study.tags.map((tag, index) => (
+                        <motion.span
                           key={tag}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: index * 0.1 }}
+                          whileHover={{ scale: 1.05 }}
                           className="px-2 py-1 bg-gradient-start/10 border border-gradient-start/20 rounded text-xs text-gradient-start"
                         >
                           {tag}
-                        </span>
+                        </motion.span>
                       ))}
                     </div>
 
-                    <Button variant="outline-glow" className="w-full group">
-                      View Full Case Study
-                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
-                    </Button>
+                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mt-auto">
+                      <Button variant="outline-glow" className="w-full group">
+                        View Full Case Study
+                        <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
+                      </Button>
+                    </motion.div>
                   </CardContent>
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Stats Section with Perfect Alignment */}
       <section className="section-padding bg-surface/50">
         <div className="container-custom">
           <motion.div
@@ -248,7 +335,13 @@ const CaseStudies = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {[
               { number: '150+', label: 'Projects Launched', desc: 'Successful Web3 launches' },
               { number: '$2.1B+', label: 'Market Cap Driven', desc: 'Total value created' },
@@ -257,26 +350,74 @@ const CaseStudies = () => {
             ].map((stat, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center"
+                variants={{
+                  hidden: { 
+                    opacity: 0, 
+                    y: 30,
+                    scale: 0.9
+                  },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      duration: 0.6,
+                      ease: "easeOut"
+                    }
+                  }
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  y: -5,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+                className="text-center h-full"
               >
-                <div className="bg-background border border-border rounded-xl p-8 card-glow hover:border-gradient-start/30 transition-all duration-300">
-                  <div className="text-4xl lg:text-5xl font-bold gradient-text mb-3">
-                    {stat.number}
+                <motion.div 
+                  className="bg-background border border-border rounded-xl p-8 card-glow hover:border-gradient-start/30 transition-all duration-300 h-full flex flex-col justify-between min-h-[200px]"
+                  whileHover={{ 
+                    boxShadow: "0 20px 40px rgba(59, 130, 246, 0.15)",
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <div className="flex-1 flex flex-col justify-center">
+                    <motion.div 
+                      className="text-4xl lg:text-5xl font-bold gradient-text mb-3"
+                      initial={{ scale: 0.5, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: index * 0.1,
+                        type: "spring",
+                        stiffness: 200
+                      }}
+                    >
+                      {stat.number}
+                    </motion.div>
+                    <motion.div 
+                      className="text-lg font-semibold text-text-primary mb-2"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
+                    >
+                      {stat.label}
+                    </motion.div>
+                    <motion.div 
+                      className="text-sm text-text-secondary"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                    >
+                      {stat.desc}
+                    </motion.div>
                   </div>
-                  <div className="text-lg font-semibold text-text-primary mb-2">
-                    {stat.label}
-                  </div>
-                  <div className="text-sm text-text-secondary">
-                    {stat.desc}
-                  </div>
-                </div>
+                </motion.div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -295,15 +436,31 @@ const CaseStudies = () => {
             <p className="text-xl text-text-secondary mb-8">
               Join the 150+ Web3 projects that have achieved extraordinary results with KryptoSpire.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="xl" onClick={() => navigate('/contact')}>
-                Book a Strategy Call
-              </Button>
-              <Button variant="outline-glow" size="xl" onClick={() => navigate(`/case-studies/${caseStudies[0].id}`)}>
-                <ExternalLink className="mr-2" size={16} />
-                View Full Case Studies
-              </Button>
-            </div>
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button variant="hero" size="xl" onClick={() => navigate('/contact')}>
+                  Book a Strategy Call
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button variant="outline-glow" size="xl" onClick={() => navigate(`/case-studies/${caseStudies[0].id}`)}>
+                  <ExternalLink className="mr-2" size={16} />
+                  View Full Case Studies
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
