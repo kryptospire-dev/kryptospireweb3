@@ -4,6 +4,7 @@ import { ABOUT_DATA } from '@/constants/data';
 import { handleNavigation } from '@/utils/navigation';
 import TeamSection from '@/components/sections/TeamSection';
 import MissionSection from '@/components/sections/MissionSection';
+import { Target, Award, Users, Heart } from 'lucide-react';
 
 const About = () => {
   return (
@@ -112,10 +113,10 @@ const About = () => {
             {ABOUT_DATA.values.map((value, index) => {
               // Dynamic icon mapping
               const iconMap: { [key: string]: any } = {
-                Target: require('lucide-react').Target,
-                Award: require('lucide-react').Award,
-                Users: require('lucide-react').Users,
-                Heart: require('lucide-react').Heart,
+                Target,
+                Award,
+                Users,
+                Heart,
               };
               const IconComponent = iconMap[value.icon];
               
