@@ -139,7 +139,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    /* @apply border border-gray-200; */
   }
 
   body {
