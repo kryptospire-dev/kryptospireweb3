@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { ArrowRight, ExternalLink, TrendingUp, Users, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import CaseStudyDialog from '../components/sections/CaseStudyDialog'; // Import the dialog component
 
 const CaseStudies = () => {
-  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const filters = ['All', 'DeFi', 'NFTs', 'DAOs', 'GameFi', 'Infrastructure'];
 
@@ -98,6 +99,25 @@ const CaseStudies = () => {
     }
   ];
 
+  // Use useCallback to memoize the filter handler
+  const handleFilterChange = useCallback((filter) => {
+    console.log('Filter change requested:', filter, 'Current:', activeFilter);
+    setActiveFilter(filter);
+  }, [activeFilter]);
+
+  // Handler for opening case study dialog
+  const handleCaseStudyClick = useCallback((caseStudy) => {
+    setSelectedCaseStudy(caseStudy);
+    setIsDialogOpen(true);
+  }, []);
+
+  // Handler for closing dialog
+  const handleCloseDialog = useCallback(() => {
+    setIsDialogOpen(false);
+    setSelectedCaseStudy(null);
+  }, []);
+
+  // Memoize the filtered results
   const filteredStudies = activeFilter === 'All' 
     ? caseStudies 
     : caseStudies.filter(study => study.category === activeFilter);
@@ -195,7 +215,7 @@ const CaseStudies = () => {
           >
             {filters.map((filter, index) => (
               <motion.button
-                key={filter}
+                key={`filter-${filter}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -205,12 +225,18 @@ const CaseStudies = () => {
                   transition: { type: "spring", stiffness: 300 }
                 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('Button clicked for filter:', filter);
+                  handleFilterChange(filter);
+                }}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 cursor-pointer ${
                   activeFilter === filter
                     ? 'bg-gradient-primary text-white shadow-glow-primary'
                     : 'bg-surface border border-border text-text-secondary hover:border-gradient-start/30 hover:text-gradient-start'
                 }`}
+                type="button"
               >
                 {filter}
               </motion.button>
@@ -219,15 +245,15 @@ const CaseStudies = () => {
 
           {/* Case Studies Grid */}
           <motion.div 
+            key={`grid-${activeFilter}`} // Force re-render when filter changes
             variants={containerVariants}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            animate="visible" // Changed from whileInView to animate
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {filteredStudies.map((study) => (
               <motion.div
-                key={study.id}
+                key={`study-${study.id}-${activeFilter}`} // Unique key with filter
                 variants={cardVariants}
                 whileHover={{ 
                   y: -8,
@@ -305,7 +331,11 @@ const CaseStudies = () => {
                     </div>
 
                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="mt-auto">
-                      <Button variant="outline-glow" className="w-full group">
+                      <Button 
+                        variant="outline-glow" 
+                        className="w-full group"
+                        onClick={() => handleCaseStudyClick(study)}
+                      >
                         View Full Case Study
                         <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
                       </Button>
@@ -318,7 +348,7 @@ const CaseStudies = () => {
         </div>
       </section>
 
-      {/* Stats Section with Perfect Alignment */}
+      {/* Stats Section */}
       <section className="section-padding bg-surface/50">
         <div className="container-custom">
           <motion.div
@@ -447,7 +477,7 @@ const CaseStudies = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button variant="hero" size="xl" onClick={() => navigate('/contact')}>
+                <Button variant="hero" size="xl">
                   Book a Strategy Call
                 </Button>
               </motion.div>
@@ -455,7 +485,7 @@ const CaseStudies = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button variant="outline-glow" size="xl" onClick={() => navigate(`/case-studies/${caseStudies[0].id}`)}>
+                <Button variant="outline-glow" size="xl">
                   <ExternalLink className="mr-2" size={16} />
                   View Full Case Studies
                 </Button>
@@ -464,6 +494,13 @@ const CaseStudies = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Case Study Dialog */}
+      <CaseStudyDialog 
+        isOpen={isDialogOpen}
+        onClose={handleCloseDialog}
+        caseStudy={selectedCaseStudy}
+      />
     </main>
   );
 };
