@@ -4,6 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const Footer = () => {
+  // Your Calendly URL - Same as in Navigation
+  const CALENDLY_URL = "https://calendly.com/kryptospire96/web-3";
+
   const companyLinks = [
     { name: "About", href: "/about" },
     { name: "Careers", href: "/careers" },
@@ -34,7 +37,7 @@ const Footer = () => {
     { name: "Telegram", href: "https://t.me/kryptospire", icon: Send },
   ];
 
-  // 👇 Detect route change and scroll to top
+  // Detect route change and scroll to top
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -43,6 +46,12 @@ const Footer = () => {
   // Scroll to top button
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Calendly booking handler - Same as Navigation
+  const handleBookCall = () => {
+    console.log('Opening Calendly from footer...');
+    window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
   };
 
   // Animation variants
@@ -219,17 +228,17 @@ const Footer = () => {
                 Ready to scale your Web3 project? Let's talk.
               </p>
 
+              {/* Updated Book a Call Button - Now opens Calendly directly */}
               <motion.div>
-                <Link to="/contact" className="inline-block w-full">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                    className="bg-gradient-primary px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold text-white hover:shadow-glow-primary transition-all duration-300 w-full text-sm sm:text-base"
-                  >
-                    Book a Call
-                  </motion.button>
-                </Link>
+                <motion.button
+                  onClick={handleBookCall}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="bg-gradient-primary px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg font-semibold text-white hover:shadow-glow-primary transition-all duration-300 w-full text-sm sm:text-base"
+                >
+                  Book a Call
+                </motion.button>
               </motion.div>
             </div>
           </motion.div>

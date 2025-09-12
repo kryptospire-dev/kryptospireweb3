@@ -6,6 +6,15 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import CaseStudyDialog from '../components/sections/CaseStudyDialog'; // Import the dialog component
 
 const CaseStudies = () => {
+  // Your Calendly URL - Same as other components
+  const CALENDLY_URL = "https://calendly.com/kryptospire96/web-3";
+
+  // Calendly booking handler
+  const handleBookCall = () => {
+    console.log('Opening Calendly from case studies page...');
+    window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+  };
+
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -477,7 +486,11 @@ const CaseStudies = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button variant="hero" size="xl">
+                <Button 
+                  variant="hero" 
+                  size="xl"
+                  onClick={handleBookCall}
+                >
                   Book a Strategy Call
                 </Button>
               </motion.div>

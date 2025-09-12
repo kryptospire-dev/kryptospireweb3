@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { NAVIGATION_ITEMS } from "@/constants/data";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X, Zap, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
@@ -11,7 +11,9 @@ const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // ✅ Always scroll to top on route change
+  // Your Calendly URL - Replace with your actual Calendly link
+  const CALENDLY_URL = "https://calendly.com/kryptospire96/web-3";
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [location.pathname]);
@@ -37,15 +39,30 @@ const Navigation = () => {
 
   const navItems = NAVIGATION_ITEMS;
 
-  // ✅ Centralized navigation
   const handleNavigation = (href) => {
     setIsMobileMenuOpen(false);
-
-    // wait for menu animation to close, then navigate & scroll
     setTimeout(() => {
       navigate(href);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }, 250);
+  };
+
+  // Calendly booking handler
+  const handleBookCall = () => {
+    setIsMobileMenuOpen(false);
+    
+    // Option 1: Open in new tab (Recommended)
+    window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+    
+    // Option 2: Navigate in same tab
+    // window.location.href = CALENDLY_URL;
+    
+    // Option 3: Embedded popup (requires Calendly widget script)
+    // if (window.Calendly) {
+    //   window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+    // } else {
+    //   window.open(CALENDLY_URL, '_blank');
+    // }
   };
 
   return (
@@ -102,10 +119,11 @@ const Navigation = () => {
             <Button
               variant="hero"
               size="lg"
-              className="px-4 xl:px-6 py-2.5 xl:py-3 text-sm xl:text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 whitespace-nowrap"
-              onClick={() => handleNavigation("/contact")}
+              className="px-4 xl:px-6 py-2.5 xl:py-3 text-sm xl:text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 whitespace-nowrap flex items-center gap-2 group"
+              onClick={handleBookCall}
             >
-              Book a Strategy Call
+              <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              Book Strategy Call
             </Button>
           </div>
 
@@ -160,10 +178,11 @@ const Navigation = () => {
                   <Button
                     variant="hero"
                     size="lg"
-                    className="w-full py-3 sm:py-4 text-sm sm:text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg"
-                    onClick={() => handleNavigation("/contact")}
+                    className="w-full py-3 sm:py-4 text-sm sm:text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg flex items-center justify-center gap-2 group"
+                    onClick={handleBookCall}
                   >
-                    Book a Strategy Call
+                    <Calendar className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    Book Strategy Call
                   </Button>
                 </motion.div>
               </div>

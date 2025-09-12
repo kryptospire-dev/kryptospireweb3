@@ -18,6 +18,15 @@ import {
 } from 'lucide-react';
 
 const Services = () => {
+  // Your Calendly URL - Same as Navigation and Footer
+  const CALENDLY_URL = "https://calendly.com/kryptospire96/web-3";
+
+  // Calendly booking handler
+  const handleBookCall = () => {
+    console.log('Opening Calendly from services page...');
+    window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+  };
+
   // Professional animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -153,7 +162,7 @@ const Services = () => {
   };
 
   // Get icon component based on name
-  const getIconComponent = (iconName: string) => {
+  const getIconComponent = (iconName) => {
     switch (iconName) {
       case 'Users': return Users;
       case 'TrendingUp': return TrendingUp;
@@ -221,7 +230,7 @@ const Services = () => {
                 <Button 
                   variant="hero" 
                   size="xl"
-                  onClick={() => handleNavigation('/contact')}
+                  onClick={handleBookCall}
                 >
                   Get Custom Strategy
                 </Button>
@@ -292,94 +301,93 @@ const Services = () => {
                   key={service.title}
                   variants={cardVariants}
                   className="group cursor-pointer h-full"
-                  onClick={() => handleNavigation('/contact')}
+                  onClick={handleBookCall}
                   whileHover="hover"
                 >
                   <motion.div 
-  className="bg-surface border border-border rounded-xl p-8 h-full card-glow group-hover:border-gradient-start/30 
-             transition-all duration-500 relative overflow-hidden
-             flex flex-col items-center text-center 
-             sm:items-start sm:text-left"
-  variants={cardHoverVariants}
-  initial="initial"
-  whileHover="hover"
->
-  {/* Subtle background gradient on hover */}
-  <motion.div
-    className="absolute inset-0 bg-gradient-to-br from-gradient-start/3 to-gradient-end/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-    initial={false}
-  />
+                    className="bg-surface border border-border rounded-xl p-8 h-full card-glow group-hover:border-gradient-start/30 
+                               transition-all duration-500 relative overflow-hidden
+                               flex flex-col items-center text-center 
+                               sm:items-start sm:text-left"
+                    variants={cardHoverVariants}
+                    initial="initial"
+                    whileHover="hover"
+                  >
+                    {/* Subtle background gradient on hover */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-gradient-start/3 to-gradient-end/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      initial={false}
+                    />
 
-  {/* Content */}
-  <div className="relative z-10">
-    <motion.div 
-      className={`flex items-center justify-center w-14 h-14 bg-gradient-to-br ${service.gradient} rounded-lg mb-6 
-                  mx-auto sm:mx-0`}
-      variants={iconVariants}
-      initial="hidden"
-      whileInView="visible"
-      whileHover="hover"
-      viewport={{ once: true }}
-    >
-      <IconComponent className="text-white" size={24} />
-    </motion.div>
-    
-    <motion.h3 
-      className="text-xl font-semibold text-text-primary mb-4 group-hover:gradient-text transition-all duration-500"
-      variants={titleVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
-      {service.title}
-    </motion.h3>
-    
-    <motion.p 
-      className="text-text-secondary mb-6 leading-relaxed"
-      variants={descriptionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
-      {service.description}
-    </motion.p>
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <motion.div 
+                        className={`flex items-center justify-center w-14 h-14 bg-gradient-to-br ${service.gradient} rounded-lg mb-6 
+                                    mx-auto sm:mx-0`}
+                        variants={iconVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        whileHover="hover"
+                        viewport={{ once: true }}
+                      >
+                        <IconComponent className="text-white" size={24} />
+                      </motion.div>
+                      
+                      <motion.h3 
+                        className="text-xl font-semibold text-text-primary mb-4 group-hover:gradient-text transition-all duration-500"
+                        variants={titleVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                      >
+                        {service.title}
+                      </motion.h3>
+                      
+                      <motion.p 
+                        className="text-text-secondary mb-6 leading-relaxed"
+                        variants={descriptionVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                      >
+                        {service.description}
+                      </motion.p>
 
-    <ul className="space-y-2">
-      {service.features.map((feature, featureIndex) => (
-        <motion.li 
-          key={featureIndex} 
-          className="flex items-center text-sm text-text-secondary"
-          variants={featureVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          custom={featureIndex}
-        >
-          <motion.div 
-            className="w-1.5 h-1.5 bg-gradient-start rounded-full mr-3 flex-shrink-0"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ 
-              duration: 0.3, 
-              delay: 0.6 + (featureIndex * 0.05),
-              type: "spring",
-              stiffness: 300
-            }}
-          />
-          {feature}
-        </motion.li>
-      ))}
-    </ul>
-  </div>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, featureIndex) => (
+                          <motion.li 
+                            key={featureIndex} 
+                            className="flex items-center text-sm text-text-secondary"
+                            variants={featureVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={featureIndex}
+                          >
+                            <motion.div 
+                              className="w-1.5 h-1.5 bg-gradient-start rounded-full mr-3 flex-shrink-0"
+                              initial={{ scale: 0 }}
+                              whileInView={{ scale: 1 }}
+                              viewport={{ once: true }}
+                              transition={{ 
+                                duration: 0.3, 
+                                delay: 0.6 + (featureIndex * 0.05),
+                                type: "spring",
+                                stiffness: 300
+                              }}
+                            />
+                            {feature}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
 
-  {/* Hover border effect */}
-  <motion.div
-    className="absolute inset-0 border border-gradient-start/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-    initial={false}
-  />
-</motion.div>
-
+                    {/* Hover border effect */}
+                    <motion.div
+                      className="absolute inset-0 border border-gradient-start/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      initial={false}
+                    />
+                  </motion.div>
                 </motion.div>
               );
             })}
@@ -443,7 +451,7 @@ const Services = () => {
                 <Button 
                   variant="hero" 
                   size="xl"
-                  onClick={() => handleNavigation('/contact')}
+                  onClick={handleBookCall}
                 >
                   Book a Strategy Call
                 </Button>
