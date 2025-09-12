@@ -220,7 +220,7 @@ const WhyChooseUs = () => {
                 <div className="text-sm text-text-secondary">Projects Launched</div>
               </div>
               <div>
-                <div className="text-2xl lg:text-3xl font-bold gradient-text mb-2">$2.1B+</div>
+                <div className="text-2xl lg:text-3xl font-bold gradient-text mb-2">$1.1B+</div>
                 <div className="text-sm text-text-secondary">Market Cap Driven</div>
               </div>
               <div>

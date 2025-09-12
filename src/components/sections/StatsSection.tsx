@@ -11,8 +11,8 @@ const StatsSection = () => {
   const stats = [
     {
       icon: TrendingUp,
-      number: '$2.1B+',
-      targetValue: 2.1,
+      number: '$1.1B+',
+      targetValue: 1.1,
       suffix: 'B+',
       prefix: '$',
       label: 'Market Cap Driven',
@@ -62,8 +62,8 @@ const StatsSection = () => {
     },
     {
       icon: Zap,
-      number: '48hrs',
-      targetValue: 48,
+      number: '24hrs',
+      targetValue: 24,
       suffix: 'hrs',
       label: 'Response Time',
       description: 'Average client response time',

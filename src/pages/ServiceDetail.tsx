@@ -9,6 +9,15 @@ const ServiceDetail = () => {
   const { service } = useParams();
   const navigate = useNavigate();
   
+  // Your Calendly URL - Same as other components
+  const CALENDLY_URL = "https://calendly.com/kryptospire96/web-3";
+
+  // Calendly booking handler
+  const handleBookCall = () => {
+    console.log('Opening Calendly from service detail page...');
+    window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+  };
+  
   const serviceData = SERVICES_DATA.find(s => 
     s.title.toLowerCase().replace(/\s+/g, '-') === service
   );
@@ -56,7 +65,12 @@ const ServiceDetail = () => {
               {serviceData.description}
             </p>
             
-            <Button variant="hero" size="lg" onClick={() => navigate('/contact')}>
+            <Button 
+              variant="hero" 
+              size="lg" 
+              onClick={handleBookCall}
+              className="transform transition-transform duration-200 hover:scale-105 active:scale-95"
+            >
               Get Started Today
             </Button>
           </motion.div>
@@ -133,7 +147,13 @@ const ServiceDetail = () => {
             </div>
 
             {/* CTA */}
-            <div className="bg-surface border border-border rounded-xl p-8 text-center">
+            <motion.div 
+              className="bg-surface border border-border rounded-xl p-8 text-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <h3 className="text-2xl font-semibold mb-4">
                 Ready to get started with {serviceData.title}?
               </h3>
@@ -141,10 +161,19 @@ const ServiceDetail = () => {
                 Let's discuss how our {serviceData.title.toLowerCase()} expertise can help 
                 accelerate your Web3 project's growth.
               </p>
-              <Button variant="hero" size="lg" onClick={() => navigate('/contact')}>
-                Book Your Strategy Call
-              </Button>
-            </div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button 
+                  variant="hero" 
+                  size="lg" 
+                  onClick={handleBookCall}
+                >
+                  Book Your Strategy Call
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </section>

@@ -17,8 +17,8 @@ const Hero = () => {
 
   const stats = [
     { key: 'projects', number: 150, label: 'Projects Launched', suffix: '+' },
-    { key: 'marketCap', number: 2.1, label: 'Market Cap Driven', prefix: '$', suffix: 'B+' },
-    { key: 'members', number: 5, label: 'Community Members', suffix: 'M+' },
+    { key: 'marketCap', number: 1.1, label: 'Market Cap Driven', prefix: '$', suffix: 'B+' },
+    { key: 'members', number: 1, label: 'Community Members', suffix: 'M+' },
   ];
 
   // Animated counter function

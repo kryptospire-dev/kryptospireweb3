@@ -5,6 +5,14 @@ import { useEffect } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const CaseStudyDialog = ({ isOpen, onClose, caseStudy }) => {
+  // Your Calendly URL - Same as other components
+  const CALENDLY_URL = "https://calendly.com/kryptospire96/web-3";
+
+  // Calendly booking handler
+  const handleBookCall = () => {
+    console.log('Opening Calendly from case study dialog...');
+    window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -434,14 +442,29 @@ const CaseStudyDialog = ({ isOpen, onClose, caseStudy }) => {
                 )}
 
                 {/* CTA */}
-                <div className="p-6 border-t border-border bg-background text-center">
-    <h3 className="text-xl font-semibold text-text-primary mb-4">
-      Ready to achieve similar results?
-    </h3>
-    <Button variant="hero" size="lg" className="w-full sm:w-auto">
-      Book a Strategy Call
-    </Button>
-  </div>
+                <motion.div 
+                  className="p-6 border-t border-border bg-background text-center"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.5 }}
+                >
+                  <h3 className="text-xl font-semibold text-text-primary mb-4">
+                    Ready to achieve similar results?
+                  </h3>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button 
+                      variant="hero" 
+                      size="lg" 
+                      className="w-full sm:w-auto"
+                      onClick={handleBookCall}
+                    >
+                      Book a Strategy Call
+                    </Button>
+                  </motion.div>
+                </motion.div>
               </CardContent>
             </Card>
           </motion.div>

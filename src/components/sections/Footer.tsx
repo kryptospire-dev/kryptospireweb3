@@ -215,12 +215,12 @@ const Footer = () => {
                   className="sm:w-[18px] sm:h-[18px] mr-3 text-gradient-start flex-shrink-0"
                 />
                 <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=hello@kryptospire.com"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=kryptospire@gmail.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-gradient-start transition-colors text-sm sm:text-base"
                 >
-                  hello@kryptospire.com
+                  kryptospire@gmail.com
                 </a>
               </motion.div>
 

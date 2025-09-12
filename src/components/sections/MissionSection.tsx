@@ -66,7 +66,7 @@ const MissionSection = () => {
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold gradient-text mb-2">
-                  $2.1B+
+                  $1.1B+
                 </div>
                 <div className="text-sm text-text-secondary">
                   Market Cap Driven

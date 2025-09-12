@@ -4,10 +4,10 @@ const TrustedBy = () => {
   const partners = [
     { name: 'Ethereum', logo: '🔷' },
     { name: 'Polygon', logo: '🔮' },
-    { name: 'Chainlink', logo: '🔗' },
+    { name: 'Minati', logo: '🔗' },
     { name: 'Uniswap', logo: '🦄' },
     { name: 'Aave', logo: '👻' },
-    { name: 'Compound', logo: '⚡' },
+    { name: 'Apex Protocal', logo: '⚡' },
   ];
 
   return (

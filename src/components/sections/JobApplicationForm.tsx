@@ -1,8 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { X, Upload, Send, User, Mail, Phone, MapPin, FileText, Briefcase, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
@@ -23,6 +22,18 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // ✅ Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   if (!jobRole) return null;
 
@@ -48,18 +59,17 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     setIsSubmitting(false);
     setSubmitSuccess(true);
-    
+
     // Reset after showing success
     setTimeout(() => {
       setSubmitSuccess(false);
       onClose();
-      // Reset form
       setFormData({
         firstName: '',
         lastName: '',
@@ -78,39 +88,25 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
 
   const backdropVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       transition: { duration: 0.3 }
     },
-    exit: { 
+    exit: {
       opacity: 0,
       transition: { duration: 0.2 }
     }
   };
 
   const formVariants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.9,
-      y: 30
-    },
-    visible: { 
-      opacity: 1, 
+    hidden: { opacity: 0, scale: 0.9, y: 30 },
+    visible: {
+      opacity: 1,
       scale: 1,
       y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 25,
-        duration: 0.4
-      }
+      transition: { type: 'spring', stiffness: 300, damping: 25, duration: 0.4 }
     },
-    exit: { 
-      opacity: 0, 
-      scale: 0.9,
-      y: 30,
-      transition: { duration: 0.3 }
-    }
+    exit: { opacity: 0, scale: 0.9, y: 30, transition: { duration: 0.3 } }
   };
 
   const fieldVariants = {
@@ -118,23 +114,16 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
     visible: (i) => ({
       opacity: 1,
       x: 0,
-      transition: {
-        duration: 0.3,
-        delay: i * 0.05
-      }
+      transition: { duration: 0.3, delay: i * 0.05 }
     })
   };
 
   const successVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 20
-      }
+      transition: { type: 'spring', stiffness: 300, damping: 20 }
     }
   };
 
@@ -151,7 +140,7 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={onClose}
           />
-          
+
           {/* Form Container */}
           <motion.div
             variants={formVariants}
@@ -177,8 +166,12 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                   >
                     <Send className="text-white" size={32} />
                   </motion.div>
-                  <h3 className="text-2xl font-bold text-text-primary mb-2">Application Submitted!</h3>
-                  <p className="text-text-secondary">We'll review your application and get back to you soon.</p>
+                  <h3 className="text-2xl font-bold text-text-primary mb-2">
+                    Application Submitted!
+                  </h3>
+                  <p className="text-text-secondary">
+                    We'll review your application and get back to you soon.
+                  </p>
                 </div>
               </motion.div>
             )}
@@ -187,7 +180,9 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
             <div className="bg-gradient-to-r from-gradient-start to-gradient-end p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-2">Apply for {jobRole.title}</h2>
+                  <h2 className="text-2xl font-bold text-white mb-2">
+                    Apply for {jobRole.title}
+                  </h2>
                   <div className="flex items-center text-white/80 text-sm gap-4">
                     <span className="flex items-center">
                       <Briefcase size={14} className="mr-1" />
@@ -221,12 +216,7 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                       Personal Information
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <motion.div
-                        variants={fieldVariants}
-                        initial="hidden"
-                        animate="visible"
-                        custom={0}
-                      >
+                      <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={0}>
                         <label className="block text-sm font-medium text-text-primary mb-2">
                           First Name *
                         </label>
@@ -238,13 +228,8 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                           placeholder="Enter your first name"
                         />
                       </motion.div>
-                      
-                      <motion.div
-                        variants={fieldVariants}
-                        initial="hidden"
-                        animate="visible"
-                        custom={1}
-                      >
+
+                      <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={1}>
                         <label className="block text-sm font-medium text-text-primary mb-2">
                           Last Name *
                         </label>
@@ -266,12 +251,7 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                       Contact Information
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <motion.div
-                        variants={fieldVariants}
-                        initial="hidden"
-                        animate="visible"
-                        custom={2}
-                      >
+                      <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={2}>
                         <label className="block text-sm font-medium text-text-primary mb-2">
                           Email Address *
                         </label>
@@ -284,13 +264,8 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                           placeholder="your.email@example.com"
                         />
                       </motion.div>
-                      
-                      <motion.div
-                        variants={fieldVariants}
-                        initial="hidden"
-                        animate="visible"
-                        custom={3}
-                      >
+
+                      <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={3}>
                         <label className="block text-sm font-medium text-text-primary mb-2">
                           Phone Number
                         </label>
@@ -302,13 +277,8 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                           placeholder="+1 (555) 123-4567"
                         />
                       </motion.div>
-                      
-                      <motion.div
-                        variants={fieldVariants}
-                        initial="hidden"
-                        animate="visible"
-                        custom={4}
-                      >
+
+                      <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={4}>
                         <label className="block text-sm font-medium text-text-primary mb-2">
                           Location
                         </label>
@@ -319,13 +289,8 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                           placeholder="City, Country"
                         />
                       </motion.div>
-                      
-                      <motion.div
-                        variants={fieldVariants}
-                        initial="hidden"
-                        animate="visible"
-                        custom={5}
-                      >
+
+                      <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={5}>
                         <label className="block text-sm font-medium text-text-primary mb-2">
                           Available Start Date
                         </label>
@@ -346,12 +311,7 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                       Professional Information
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <motion.div
-                        variants={fieldVariants}
-                        initial="hidden"
-                        animate="visible"
-                        custom={6}
-                      >
+                      <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={6}>
                         <label className="block text-sm font-medium text-text-primary mb-2">
                           LinkedIn Profile
                         </label>
@@ -363,13 +323,8 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                           placeholder="https://linkedin.com/in/yourprofile"
                         />
                       </motion.div>
-                      
-                      <motion.div
-                        variants={fieldVariants}
-                        initial="hidden"
-                        animate="visible"
-                        custom={7}
-                      >
+
+                      <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={7}>
                         <label className="block text-sm font-medium text-text-primary mb-2">
                           Portfolio/Website
                         </label>
@@ -385,12 +340,7 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                   </div>
 
                   {/* Experience */}
-                  <motion.div
-                    variants={fieldVariants}
-                    initial="hidden"
-                    animate="visible"
-                    custom={8}
-                  >
+                  <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={8}>
                     <label className="block text-sm font-medium text-text-primary mb-2">
                       Years of Relevant Experience *
                     </label>
@@ -404,12 +354,7 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                   </motion.div>
 
                   {/* Resume Upload */}
-                  <motion.div
-                    variants={fieldVariants}
-                    initial="hidden"
-                    animate="visible"
-                    custom={9}
-                  >
+                  <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={9}>
                     <label className="block text-sm font-medium text-text-primary mb-2 flex items-center">
                       <FileText className="mr-2 text-gradient-start" size={16} />
                       Resume/CV * (PDF only)
@@ -438,12 +383,7 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                   </motion.div>
 
                   {/* Cover Letter */}
-                  <motion.div
-                    variants={fieldVariants}
-                    initial="hidden"
-                    animate="visible"
-                    custom={10}
-                  >
+                  <motion.div variants={fieldVariants} initial="hidden" animate="visible" custom={10}>
                     <label className="block text-sm font-medium text-text-primary mb-2">
                       Cover Letter *
                     </label>
@@ -453,7 +393,7 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                       value={formData.coverLetter}
                       onChange={(e) => handleInputChange('coverLetter', e.target.value)}
                       className="bg-surface border-border focus:border-gradient-start resize-none transition-all duration-300"
-                      placeholder="Tell us why you're excited about this role and how your experience makes you a great fit for KryptoSpire. What interests you most about Web3 marketing?"
+                      placeholder="Tell us why you're excited about this role and how your experience makes you a great fit for KryptoSpire."
                     />
                   </motion.div>
 
@@ -464,19 +404,10 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.6 }}
                   >
-                    <Button
-                      variant="outline-glow"
-                      onClick={onClose}
-                      className="flex-1"
-                      disabled={isSubmitting}
-                    >
+                    <Button variant="outline-glow" onClick={onClose} className="flex-1" disabled={isSubmitting}>
                       Cancel
                     </Button>
-                    <motion.div
-                      className="flex-1"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
+                    <motion.div className="flex-1" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                       <Button
                         variant="hero"
                         className="w-full group"
@@ -486,7 +417,7 @@ const JobApplicationForm = ({ isOpen, onClose, jobRole }) => {
                         {isSubmitting ? (
                           <motion.div
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                             className="mr-2"
                           >
                             <Calendar size={16} />

@@ -5,8 +5,18 @@ import { handleNavigation } from "@/utils/navigation";
 import TeamSection from "@/components/sections/TeamSection";
 import MissionSection from "@/components/sections/MissionSection";
 import { Target, Award, Users, Heart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+  // Your Calendly URL - Same as other components
+  const CALENDLY_URL = "https://calendly.com/kryptospire96/web-3";
+
+  // Calendly booking handler
+  const handleBookCall = () => {
+    console.log("Opening Calendly from about page...");
+    window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
+  };
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -17,6 +27,12 @@ const About = () => {
         delayChildren: 0.2,
       },
     },
+  };
+
+  const navigate = useNavigate();
+
+  const handleCaseStudiesNavigation = () => {
+    navigate("/case-studies");
   };
 
   const itemVariants = {
@@ -140,11 +156,7 @@ const About = () => {
                 whileHover="hover"
                 whileTap="tap"
               >
-                <Button
-                  variant="hero"
-                  size="xl"
-                  onClick={() => handleNavigation("/contact")}
-                >
+                <Button variant="hero" size="xl" onClick={handleBookCall}>
                   Start Your Growth Journey
                 </Button>
               </motion.div>
@@ -159,7 +171,7 @@ const About = () => {
                 <Button
                   variant="outline-glow"
                   size="xl"
-                  onClick={() => handleNavigation("/case-studies")}
+                  onClick={handleCaseStudiesNavigation}
                 >
                   View Our Success Stories
                 </Button>
@@ -431,11 +443,7 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.6 }}
             >
-              <Button
-                variant="hero"
-                size="xl"
-                onClick={() => handleNavigation("/contact")}
-              >
+              <Button variant="hero" size="xl" onClick={handleBookCall}>
                 Start Your Growth Journey
               </Button>
             </motion.div>

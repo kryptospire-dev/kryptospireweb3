@@ -64,7 +64,7 @@ const FinalCTA = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
             {[
               { number: '150+', label: 'Projects Launched' },
-              { number: '$2.1B+', label: 'Market Cap Driven' },
+              { number: '$1.1B+', label: 'Market Cap Driven' },
               { number: '5M+', label: 'Community Members' },
             ].map((stat, index) => (
               <motion.div
