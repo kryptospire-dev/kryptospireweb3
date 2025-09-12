@@ -155,9 +155,9 @@ const ServicesOverview = () => {
               >
                 <div className="relative bg-surface/80 backdrop-blur-sm border border-border rounded-2xl p-6 lg:p-8 h-full overflow-hidden">
 
-                  {/* Enhanced Icon */}
+                  {/* Enhanced Icon - Centered on mobile, left on desktop */}
                   <motion.div
-                    className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl mb-6 relative z-10 shadow-lg`}
+                    className={`flex lg:inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl mb-6 relative z-10 shadow-lg mx-auto lg:mx-0`}
                     whileHover={{ 
                       scale: 1.1, 
                       rotate: 5,
@@ -168,7 +168,7 @@ const ServicesOverview = () => {
                   </motion.div>
 
                   {/* Content */}
-                  <div className="relative z-10">
+                  <div className="relative z-10 text-center lg:text-left">
                     <motion.h3 
                       className="text-xl lg:text-2xl font-bold text-text-primary mb-4 group-hover:gradient-text transition-all duration-300"
                       whileHover={{ x: 5 }}
@@ -188,7 +188,7 @@ const ServicesOverview = () => {
                           initial={{ opacity: 0, x: -10 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ delay: service.delay + featureIndex * 0.1 }}
-                          className="flex items-center text-sm text-text-secondary"
+                          className="flex items-center justify-center lg:justify-start text-sm text-text-secondary"
                         >
                           <CheckCircle className="w-4 h-4 text-gradient-start mr-2 flex-shrink-0" />
                           {feature}

@@ -1,11 +1,28 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { MapPin, Clock, Users, Coffee, Heart, Zap, Globe, BookOpen, ArrowRight, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import JobApplicationForm from '../components/sections/JobApplicationForm'; // Import the job application form
 
 const Careers = () => {
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [isApplicationFormOpen, setIsApplicationFormOpen] = useState(false);
+
+  // Function to handle apply button click
+  const handleApplyClick = (job) => {
+    setSelectedJob(job);
+    setIsApplicationFormOpen(true);
+  };
+
+  // Function to close application form
+  const handleCloseApplicationForm = () => {
+    setIsApplicationFormOpen(false);
+    setSelectedJob(null);
+  };
+
   // Professional animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -130,17 +147,6 @@ const Careers = () => {
         delay: 0.4 + (i * 0.05)
       }
     })
-  };
-
-  const floatingVariants = {
-    animate: {
-      y: [0, -8, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
   };
 
   const pulseVariants = {
@@ -587,7 +593,11 @@ const Careers = () => {
                         whileTap="tap"
                         viewport={{ once: true }}
                       >
-                        <Button variant="outline-glow" className="w-full group">
+                        <Button 
+                          variant="outline-glow" 
+                          className="w-full group"
+                          onClick={() => handleApplyClick(role)}
+                        >
                           Apply Now
                           <motion.div
                             className="ml-2"
@@ -693,7 +703,7 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* Application Form */}
+      {/* General Application Form */}
       <section className="section-padding bg-surface/50">
         <div className="container-custom">
           <motion.div
@@ -733,7 +743,7 @@ const Careers = () => {
             >
               <Card className="bg-background border-border">
                 <CardContent className="p-8">
-                  <form className="space-y-6">
+                  <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <motion.div
                         variants={formFieldVariants}
@@ -766,12 +776,32 @@ const Careers = () => {
                       initial="hidden"
                       whileInView="visible"
                       viewport={{ once: true }}
+                      custom={2}
+                    >
+                      <label className="block text-sm font-medium text-text-primary mb-2">
+                        Email Address
+                      </label>
+                      <Input 
+                        type="email"
+                        className="bg-surface border-border focus:border-gradient-start transition-all duration-300" 
+                        placeholder="your.email@example.com"
+                      />
+                    </motion.div>
+                    
+                    <motion.div
+                      variants={formFieldVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
                       custom={3}
                     >
                       <label className="block text-sm font-medium text-text-primary mb-2">
                         Role of Interest
                       </label>
-                      <Input className="bg-surface border-border focus:border-gradient-start transition-all duration-300" />
+                      <Input 
+                        className="bg-surface border-border focus:border-gradient-start transition-all duration-300" 
+                        placeholder="e.g., Marketing, Community, Content"
+                      />
                     </motion.div>
                     
                     <motion.div
@@ -820,13 +850,20 @@ const Careers = () => {
                         </motion.span>
                       </Button>
                     </motion.div>
-                  </form>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
           </motion.div>
         </div>
       </section>
+
+      {/* Job Application Form Modal */}
+      <JobApplicationForm 
+        isOpen={isApplicationFormOpen}
+        onClose={handleCloseApplicationForm}
+        jobRole={selectedJob}
+      />
     </main>
   );
 };

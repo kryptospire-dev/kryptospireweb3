@@ -485,10 +485,10 @@ const CaseStudies = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button variant="outline-glow" size="xl">
+                {/* <Button variant="outline-glow" size="xl">
                   <ExternalLink className="mr-2" size={16} />
                   View Full Case Studies
-                </Button>
+                </Button> */}
               </motion.div>
             </motion.div>
           </motion.div>

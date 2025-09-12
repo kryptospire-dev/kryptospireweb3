@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { NAVIGATION_ITEMS } from "@/constants/data";
 import { handleNavigation, openCalendlyModal } from "@/utils/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -20,6 +20,31 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu when screen size changes
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
   const navItems = NAVIGATION_ITEMS;
 
   return (
@@ -32,28 +57,28 @@ const Navigation = () => {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 lg:px-6">
-        <div className="grid grid-cols-3 items-center h-16 lg:h-20">
+      <nav className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
           {/* Logo - Left */}
-          <div className="flex justify-start">
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-cyan-400/25 transition-all duration-300">
-                <Zap className="w-6 h-6 text-white" />
+          <div className="flex items-center flex-shrink-0">
+            <Link to="/" className="flex items-center space-x-2 group">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-cyan-400/25 transition-all duration-300">
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
               </div>
-              <span className="font-orbitron font-bold text-xl lg:text-2xl bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              <span className="font-orbitron font-bold text-base sm:text-lg lg:text-xl xl:text-2xl bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent whitespace-nowrap">
                 KryptoSpire
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation - Center */}
-          <div className="hidden lg:flex items-center justify-center">
-            <div className="flex items-center space-x-8">
+          <div className="hidden lg:flex items-center justify-center flex-1 mx-8">
+            <div className="flex items-center space-x-6 xl:space-x-8">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`relative text-base font-medium transition-all duration-300 hover:text-cyan-400 whitespace-nowrap ${
+                  className={`relative text-sm xl:text-base font-medium transition-all duration-300 hover:text-cyan-400 whitespace-nowrap ${
                     location.pathname === item.href
                       ? "text-cyan-400"
                       : "text-gray-300"
@@ -75,12 +100,12 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* CTA Button - Right */}
-          <div className="hidden lg:flex justify-end">
+          {/* CTA Button - Right (Desktop) */}
+          <div className="hidden lg:flex items-center flex-shrink-0">
             <Button
               variant="hero"
               size="lg"
-              className="px-6 py-3 text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300"
+              className="px-4 xl:px-6 py-2.5 xl:py-3 text-sm xl:text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 whitespace-nowrap"
               onClick={() => (window.location.href = "/contact")}
             >
               Book a Strategy Call
@@ -88,59 +113,73 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex justify-end">
+          <div className="lg:hidden flex items-center">
             <button
-              className="p-3 text-gray-300 hover:text-cyan-400 transition-colors rounded-lg"
+              className="p-1.5 sm:p-2 text-gray-300 hover:text-cyan-400 transition-colors rounded-lg"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden border-t border-gray-800 bg-black/95 backdrop-blur-sm"
-          >
-            <div className="px-6 py-8 space-y-6">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`block text-lg font-medium transition-colors hover:text-cyan-400 py-2 ${
-                    location.pathname === item.href
-                      ? "text-cyan-400"
-                      : "text-gray-300"
-                  }`}
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="lg:hidden border-t border-gray-800 bg-black/98 backdrop-blur-sm overflow-hidden"
+            >
+              <div className="px-3 sm:px-4 py-4 sm:py-6 space-y-3 sm:space-y-4">
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link
+                      to={item.href}
+                      className={`block text-base sm:text-lg font-medium transition-colors hover:text-cyan-400 py-2 ${
+                        location.pathname === item.href
+                          ? "text-cyan-400"
+                          : "text-gray-300"
+                      }`}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
+                ))}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navItems.length * 0.1 }}
+                  className="pt-3 sm:pt-4 border-t border-gray-800"
                 >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="pt-6 border-t border-gray-800">
-                <Button
-                  variant="hero"
-                  size="lg"
-                  className="w-full py-4 text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg"
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    window.location.href = "/contact";
-                  }}
-                >
-                  Book a Strategy Call
-                </Button>
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    className="w-full py-3 sm:py-4 text-sm sm:text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      window.location.href = "/contact";
+                    }}
+                  >
+                    Book a Strategy Call
+                  </Button>
+                </motion.div>
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </motion.header>
   );

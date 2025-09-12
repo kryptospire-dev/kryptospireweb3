@@ -129,11 +129,11 @@ const ProcessSection = () => {
                     {step.number}
                   </div>
                   
-                  <div className="relative z-10">
+                  <div className="relative z-10 text-center lg:text-left">
                     {/* Enhanced Header Section */}
-                    <div className="flex items-start mb-6">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-start mb-6">
                       <motion.div
-                        className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${step.gradient} rounded-2xl mr-4 shadow-lg transition-all duration-300`}
+                        className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${step.gradient} rounded-2xl mb-4 lg:mb-0 lg:mr-4 shadow-lg transition-all duration-300`}
                         whileHover={{ 
                           scale: 1.05,
                           transition: { duration: 0.3 }
@@ -167,7 +167,7 @@ const ProcessSection = () => {
                             delay: step.delay + featureIndex * 0.1,
                             duration: 0.5 
                           }}
-                          className="flex items-center text-sm text-text-secondary"
+                          className="flex items-center justify-center lg:justify-start text-sm text-text-secondary"
                         >
                           <CheckCircle className="w-4 h-4 text-gradient-start mr-3 flex-shrink-0" />
                           <span className="font-medium">{feature}</span>
@@ -201,14 +201,14 @@ const ProcessSection = () => {
             </p>
             
             {/* Process indicators */}
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
               {steps.map((step, index) => (
                 <div key={step.number} className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${step.gradient} flex items-center justify-center text-white font-bold text-sm`}>
+                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br ${step.gradient} flex items-center justify-center text-white font-bold text-xs sm:text-sm`}>
                     {step.number}
                   </div>
                   {index < steps.length - 1 && (
-                    <div className="w-8 h-px bg-gradient-start/30 mx-2" />
+                    <div className="w-4 sm:w-8 h-px bg-gradient-start/30 mx-1 sm:mx-2" />
                   )}
                 </div>
               ))}
