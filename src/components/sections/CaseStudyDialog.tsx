@@ -1,9 +1,23 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, TrendingUp, Users, DollarSign, Calendar, Target, Zap, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useEffect } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const CaseStudyDialog = ({ isOpen, onClose, caseStudy }) => {
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'; // stop background scroll
+    } else {
+      document.body.style.overflow = ''; // restore scroll
+    }
+
+    return () => {
+      document.body.style.overflow = ''; // cleanup on unmount
+    };
+  }, [isOpen]);
+
   if (!caseStudy) return null;
 
   // Detailed case study data - you can expand this based on your needs
@@ -420,19 +434,14 @@ const CaseStudyDialog = ({ isOpen, onClose, caseStudy }) => {
                 )}
 
                 {/* CTA */}
-                <motion.section 
-                  className="text-center pt-6 border-t border-border"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.5 }}
-                >
-                  <h3 className="text-xl font-semibold text-text-primary mb-4">
-                    Ready to achieve similar results?
-                  </h3>
-                  <Button variant="hero" size="lg">
-                    Book a Strategy Call
-                  </Button>
-                </motion.section>
+                <div className="p-6 border-t border-border bg-background text-center">
+    <h3 className="text-xl font-semibold text-text-primary mb-4">
+      Ready to achieve similar results?
+    </h3>
+    <Button variant="hero" size="lg" className="w-full sm:w-auto">
+      Book a Strategy Call
+    </Button>
+  </div>
               </CardContent>
             </Card>
           </motion.div>

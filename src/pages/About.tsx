@@ -1,10 +1,10 @@
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { ABOUT_DATA } from '@/constants/data';
-import { handleNavigation } from '@/utils/navigation';
-import TeamSection from '@/components/sections/TeamSection';
-import MissionSection from '@/components/sections/MissionSection';
-import { Target, Award, Users, Heart } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ABOUT_DATA } from "@/constants/data";
+import { handleNavigation } from "@/utils/navigation";
+import TeamSection from "@/components/sections/TeamSection";
+import MissionSection from "@/components/sections/MissionSection";
+import { Target, Award, Users, Heart } from "lucide-react";
 
 const About = () => {
   // Animation variants
@@ -14,44 +14,44 @@ const About = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        delayChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 30,
-      scale: 0.95
+      scale: 0.95,
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
+        ease: [0.25, 0.46, 0.45, 0.94],
+      },
+    },
   };
 
   const cardHoverVariants = {
-    initial: { 
-      y: 0, 
+    initial: {
+      y: 0,
       scale: 1,
-      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)"
+      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
     },
-    hover: { 
-      y: -5, 
+    hover: {
+      y: -5,
       scale: 1.02,
       boxShadow: "0 20px 40px rgba(59, 130, 246, 0.15)",
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 20
-      }
-    }
+        damping: 20,
+      },
+    },
   };
 
   const iconVariants = {
@@ -61,32 +61,32 @@ const About = () => {
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 10
-      }
-    }
+        damping: 10,
+      },
+    },
   };
 
   const buttonVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        delay: 0.3
-      }
+        delay: 0.3,
+      },
     },
     hover: {
       scale: 1.05,
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 20
-      }
+        damping: 20,
+      },
     },
     tap: {
-      scale: 0.95
-    }
+      scale: 0.95,
+    },
   };
 
   return (
@@ -100,31 +100,34 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <motion.h1 
+            <motion.h1
               className="text-5xl lg:text-6xl font-bold mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Building the <motion.span 
+              Building the{" "}
+              <motion.span
                 className="gradient-text"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
                 future
-              </motion.span> of Web3 marketing
+              </motion.span>{" "}
+              of Web3 marketing
             </motion.h1>
-            <motion.p 
+            <motion.p
               className="text-xl text-text-secondary leading-relaxed mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              We're more than marketers—we're Web3 natives who understand the technology, 
-              the community, and the vision that drives this revolutionary space.
+              We're more than marketers—we're Web3 natives who understand the
+              technology, the community, and the vision that drives this
+              revolutionary space.
             </motion.p>
-            <motion.div 
+            <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -137,10 +140,10 @@ const About = () => {
                 whileHover="hover"
                 whileTap="tap"
               >
-                <Button 
-                  variant="hero" 
+                <Button
+                  variant="hero"
                   size="xl"
-                  onClick={() => handleNavigation('/contact')}
+                  onClick={() => handleNavigation("/contact")}
                 >
                   Start Your Growth Journey
                 </Button>
@@ -153,10 +156,10 @@ const About = () => {
                 whileTap="tap"
                 transition={{ delay: 0.1 }}
               >
-                <Button 
-                  variant="outline-glow" 
+                <Button
+                  variant="outline-glow"
                   size="xl"
-                  onClick={() => handleNavigation('/case-studies')}
+                  onClick={() => handleNavigation("/case-studies")}
                 >
                   View Our Success Stories
                 </Button>
@@ -186,7 +189,7 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <motion.h2 
+            <motion.h2
               className="text-4xl lg:text-5xl font-bold mb-6"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -195,18 +198,19 @@ const About = () => {
             >
               Our <span className="gradient-text">Journey</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-xl text-text-secondary max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              From humble beginnings to industry leadership—here's how we've grown alongside the Web3 ecosystem.
+              From humble beginnings to industry leadership—here's how we've
+              grown alongside the Web3 ecosystem.
             </motion.p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
             variants={containerVariants}
             initial="hidden"
@@ -220,32 +224,34 @@ const About = () => {
                 className="relative group"
                 whileHover="hover"
               >
-                <motion.div 
-                  className="bg-background border border-border rounded-xl p-6 card-glow hover:border-gradient-start/30 transition-all duration-300 h-full"
+                <motion.div
+                  className="bg-surface border border-border rounded-xl p-8 card-glow group-hover:border-gradient-start/30 
+             transition-all duration-300 h-full 
+             sm:block flex flex-col items-center justify-center text-center"
                   variants={cardHoverVariants}
                   initial="initial"
                   whileHover="hover"
                 >
-                  <motion.div 
+                  <motion.div
                     className="text-3xl font-orbitron font-bold gradient-text mb-3"
                     initial={{ opacity: 0, scale: 0.5 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ 
-                      duration: 0.6, 
+                    transition={{
+                      duration: 0.6,
                       delay: index * 0.1 + 0.3,
                       type: "spring",
-                      stiffness: 200
+                      stiffness: 200,
                     }}
-                    whileHover={{ 
+                    whileHover={{
                       scale: 1.1,
                       textShadow: "0 0 20px currentColor",
-                      transition: { duration: 0.3 }
+                      transition: { duration: 0.3 },
                     }}
                   >
                     {item.year}
                   </motion.div>
-                  <motion.h3 
+                  <motion.h3
                     className="text-xl font-semibold text-text-primary mb-3"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -254,7 +260,7 @@ const About = () => {
                   >
                     {item.title}
                   </motion.h3>
-                  <motion.p 
+                  <motion.p
                     className="text-text-secondary"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -263,7 +269,7 @@ const About = () => {
                   >
                     {item.description}
                   </motion.p>
-                  
+
                   {/* Subtle hover effect */}
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-br from-gradient-start/5 to-gradient-end/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -286,7 +292,7 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <motion.h2 
+            <motion.h2
               className="text-4xl lg:text-5xl font-bold mb-6"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -295,18 +301,19 @@ const About = () => {
             >
               Our <span className="gradient-text">Values</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-xl text-text-secondary max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              These principles guide every decision we make and every strategy we develop.
+              These principles guide every decision we make and every strategy
+              we develop.
             </motion.p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
             variants={containerVariants}
             initial="hidden"
@@ -317,22 +324,22 @@ const About = () => {
               // Get the correct icon component
               let IconComponent;
               switch (value.icon) {
-                case 'Target':
+                case "Target":
                   IconComponent = Target;
                   break;
-                case 'Award':
+                case "Award":
                   IconComponent = Award;
                   break;
-                case 'Users':
+                case "Users":
                   IconComponent = Users;
                   break;
-                case 'Heart':
+                case "Heart":
                   IconComponent = Heart;
                   break;
                 default:
                   IconComponent = Target;
               }
-              
+
               return (
                 <motion.div
                   key={value.title}
@@ -340,14 +347,18 @@ const About = () => {
                   className="group"
                   whileHover="hover"
                 >
-                  <motion.div 
-                    className="bg-surface border border-border rounded-xl p-8 card-glow group-hover:border-gradient-start/30 transition-all duration-300 h-full"
+                  <motion.div
+                    className="bg-surface border border-border rounded-xl p-8 card-glow group-hover:border-gradient-start/30 
+             transition-all duration-300 h-full 
+             flex flex-col items-center text-center 
+             sm:items-start sm:text-left"
                     variants={cardHoverVariants}
                     initial="initial"
                     whileHover="hover"
                   >
-                    <motion.div 
-                      className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${value.gradient} rounded-lg mb-6`}
+                    <motion.div
+                      className={`flex items-center justify-center w-14 h-14 bg-gradient-to-br ${value.gradient} rounded-lg mb-6 
+                mx-auto sm:mx-0`}
                       variants={iconVariants}
                       initial="hidden"
                       whileInView="visible"
@@ -356,22 +367,12 @@ const About = () => {
                     >
                       <IconComponent className="text-white" size={24} />
                     </motion.div>
-                    <motion.h3 
-                      className="text-2xl font-semibold text-text-primary mb-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                    >
+
+                    <motion.h3 className="text-2xl font-semibold text-text-primary mb-4">
                       {value.title}
                     </motion.h3>
-                    <motion.p 
-                      className="text-text-secondary leading-relaxed"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
-                    >
+
+                    <motion.p className="text-text-secondary leading-relaxed">
                       {value.description}
                     </motion.p>
                   </motion.div>
@@ -402,7 +403,7 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <motion.h2 
+            <motion.h2
               className="text-4xl lg:text-5xl font-bold mb-6"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -411,14 +412,15 @@ const About = () => {
             >
               Ready to <span className="gradient-text">grow together?</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-xl text-text-secondary mb-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Join the 150+ Web3 projects that trust KryptoSpire to drive their growth.
+              Join the 150+ Web3 projects that trust KryptoSpire to drive their
+              growth.
             </motion.p>
             <motion.div
               variants={buttonVariants}
@@ -429,10 +431,10 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.6 }}
             >
-              <Button 
-                variant="hero" 
+              <Button
+                variant="hero"
                 size="xl"
-                onClick={() => handleNavigation('/contact')}
+                onClick={() => handleNavigation("/contact")}
               >
                 Start Your Growth Journey
               </Button>

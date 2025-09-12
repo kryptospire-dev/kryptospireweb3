@@ -1,27 +1,31 @@
-import { motion } from 'framer-motion';
-import { Rocket, Shield, Users, Zap } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Rocket, Shield, Users, Zap } from "lucide-react";
 
 const MissionSection = () => {
   const features = [
     {
       icon: Rocket,
-      title: 'Innovation First',
-      description: 'We stay ahead of Web3 trends and pioneer new marketing methodologies.',
+      title: "Innovation First",
+      description:
+        "We stay ahead of Web3 trends and pioneer new marketing methodologies.",
     },
     {
       icon: Shield,
-      title: 'Trust & Transparency',
-      description: 'Honest communication and ethical practices in everything we do.',
+      title: "Trust & Transparency",
+      description:
+        "Honest communication and ethical practices in everything we do.",
     },
     {
       icon: Users,
-      title: 'Community Focused',
-      description: 'Building authentic relationships that drive long-term success.',
+      title: "Community Focused",
+      description:
+        "Building authentic relationships that drive long-term success.",
     },
     {
       icon: Zap,
-      title: 'Results Driven',
-      description: 'Every strategy is designed to deliver measurable, sustainable growth.',
+      title: "Results Driven",
+      description:
+        "Every strategy is designed to deliver measurable, sustainable growth.",
     },
   ];
 
@@ -40,23 +44,33 @@ const MissionSection = () => {
               Our <span className="gradient-text">mission</span>
             </h2>
             <p className="text-xl text-text-secondary leading-relaxed mb-8">
-              To empower Web3 projects with authentic marketing strategies that build genuine 
-              communities and drive sustainable growth in the decentralized future.
+              To empower Web3 projects with authentic marketing strategies that
+              build genuine communities and drive sustainable growth in the
+              decentralized future.
             </p>
             <p className="text-lg text-text-secondary leading-relaxed mb-8">
-              Since 2019, we've been at the forefront of Web3 marketing, helping projects navigate 
-              the complex landscape of decentralized communities, tokenomics, and blockchain technology. 
-              We believe in growth without the hype—real strategies for real results.
+              Since 2019, we've been at the forefront of Web3 marketing, helping
+              projects navigate the complex landscape of decentralized
+              communities, tokenomics, and blockchain technology. We believe in
+              growth without the hype—real strategies for real results.
             </p>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold gradient-text mb-2">150+</div>
-                <div className="text-sm text-text-secondary">Projects Launched</div>
+                <div className="text-3xl font-bold gradient-text mb-2">
+                  150+
+                </div>
+                <div className="text-sm text-text-secondary">
+                  Projects Launched
+                </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold gradient-text mb-2">$2.1B+</div>
-                <div className="text-sm text-text-secondary">Market Cap Driven</div>
+                <div className="text-3xl font-bold gradient-text mb-2">
+                  $2.1B+
+                </div>
+                <div className="text-sm text-text-secondary">
+                  Market Cap Driven
+                </div>
               </div>
             </div>
           </motion.div>
@@ -78,9 +92,9 @@ const MissionSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="bg-surface border border-border rounded-lg p-6 card-glow hover:border-gradient-start/30 transition-all duration-300"
+                  className="bg-surface border border-border rounded-lg p-6 card-glow hover:border-gradient-start/30 transition-all duration-300 text-center sm:text-left"
                 >
-                  <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mb-4 mx-auto sm:mx-0">
                     <IconComponent className="text-white" size={20} />
                   </div>
                   <h3 className="text-lg font-semibold text-text-primary mb-3">

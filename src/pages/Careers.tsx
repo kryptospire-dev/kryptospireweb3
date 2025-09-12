@@ -284,72 +284,49 @@ const Careers = () => {
   return (
     <main className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-background via-background to-surface">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <motion.h1 
-              className="text-5xl lg:text-6xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              Build the <motion.span 
-                className="gradient-text"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-              >
-                future
-              </motion.span> of Web3 with us
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-text-secondary leading-relaxed mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              Join a world-class team of Web3 marketing experts who are passionate about 
-              building authentic communities and driving real growth for revolutionary projects.
-            </motion.p>
-            <motion.div 
-              className="flex items-center justify-center gap-8 text-sm text-text-secondary"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <motion.div 
-                className="flex items-center"
-                whileHover={{ scale: 1.05, color: "#3b82f6" }}
-                transition={{ duration: 0.2 }}
-              >
-                <Users className="mr-2 text-gradient-start" size={16} />
-                <span>Remote-First Team</span>
-              </motion.div>
-              <motion.div 
-                className="flex items-center"
-                whileHover={{ scale: 1.05, color: "#3b82f6" }}
-                transition={{ duration: 0.2 }}
-              >
-                <Globe className="mr-2 text-gradient-start" size={16} />
-                <span>15+ Countries</span>
-              </motion.div>
-              <motion.div 
-                className="flex items-center"
-                whileHover={{ scale: 1.05, color: "#3b82f6" }}
-                transition={{ duration: 0.2 }}
-              >
-                <Heart className="mr-2 text-gradient-start" size={16} />
-                <span>4.9/5 Employee Rating</span>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Hero Section */}
+<section className="section-padding bg-gradient-to-br from-background via-background to-surface">
+  <div className="container-custom">
+    
+    {/* Desktop Hero */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
+      className="hidden md:block text-center max-w-4xl mx-auto"
+    >
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="text-5xl lg:text-6xl font-bold mb-6"
+      >
+        Build the <span className="gradient-text">future</span> of Web3 with us
+      </motion.h1>
+      
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="text-xl text-text-secondary mb-8"
+      >
+        Join a world-class team of Web3 marketing experts. Together, we'll shape the future of blockchain adoption.
+      </motion.p>
+    </motion.div>
+
+    {/* Mobile Hero */}
+    <div className="block md:hidden text-center max-w-md mx-auto">
+      <h1 className="text-3xl font-bold mb-4">
+        Build the <span className="gradient-text">future</span>
+      </h1>
+      <p className="text-base text-text-secondary">
+        Join our Web3 team 🚀
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
       {/* Why Work Here */}
       <section className="section-padding bg-background">

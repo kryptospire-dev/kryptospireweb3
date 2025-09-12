@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { NAVIGATION_ITEMS } from "@/constants/data";
-import { handleNavigation, openCalendlyModal } from "@/utils/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,42 +9,44 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // ✅ Always scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [location.pathname]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu when screen size changes
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setIsMobileMenuOpen(false);
-      }
+      if (window.innerWidth >= 1024) setIsMobileMenuOpen(false);
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset";
+    return () => (document.body.style.overflow = "unset");
   }, [isMobileMenuOpen]);
 
   const navItems = NAVIGATION_ITEMS;
+
+  // ✅ Centralized navigation
+  const handleNavigation = (href) => {
+    setIsMobileMenuOpen(false);
+
+    // wait for menu animation to close, then navigate & scroll
+    setTimeout(() => {
+      navigate(href);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 250);
+  };
 
   return (
     <motion.header
@@ -59,7 +60,7 @@ const Navigation = () => {
     >
       <nav className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
-          {/* Logo - Left */}
+          {/* Logo */}
           <div className="flex items-center flex-shrink-0">
             <Link to="/" className="flex items-center space-x-2 group">
               <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-cyan-400/25 transition-all duration-300">
@@ -71,7 +72,7 @@ const Navigation = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation - Center */}
+          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center justify-center flex-1 mx-8">
             <div className="flex items-center space-x-6 xl:space-x-8">
               {navItems.map((item) => (
@@ -83,12 +84,8 @@ const Navigation = () => {
                       ? "text-cyan-400"
                       : "text-gray-300"
                   }`}
-                  onClick={() =>
-                    window.scrollTo({ top: 0, behavior: "smooth" })
-                  }
                 >
                   {item.name}
-                  {/* Active indicator */}
                   {location.pathname === item.href && (
                     <motion.div
                       layoutId="activeTab"
@@ -100,13 +97,13 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* CTA Button - Right (Desktop) */}
+          {/* Desktop CTA */}
           <div className="hidden lg:flex items-center flex-shrink-0">
             <Button
               variant="hero"
               size="lg"
               className="px-4 xl:px-6 py-2.5 xl:py-3 text-sm xl:text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-300 whitespace-nowrap"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => handleNavigation("/contact")}
             >
               Book a Strategy Call
             </Button>
@@ -142,20 +139,16 @@ const Navigation = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <Link
-                      to={item.href}
-                      className={`block text-base sm:text-lg font-medium transition-colors hover:text-cyan-400 py-2 ${
+                    <button
+                      className={`block w-full text-left text-base sm:text-lg font-medium transition-colors hover:text-cyan-400 py-2 ${
                         location.pathname === item.href
                           ? "text-cyan-400"
                           : "text-gray-300"
                       }`}
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
+                      onClick={() => handleNavigation(item.href)}
                     >
                       {item.name}
-                    </Link>
+                    </button>
                   </motion.div>
                 ))}
                 <motion.div
@@ -168,10 +161,7 @@ const Navigation = () => {
                     variant="hero"
                     size="lg"
                     className="w-full py-3 sm:py-4 text-sm sm:text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-lg"
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      window.location.href = "/contact";
-                    }}
+                    onClick={() => handleNavigation("/contact")}
                   >
                     Book a Strategy Call
                   </Button>
