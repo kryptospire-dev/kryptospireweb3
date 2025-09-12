@@ -167,7 +167,7 @@ const ProcessSection = () => {
                             delay: step.delay + featureIndex * 0.1,
                             duration: 0.5 
                           }}
-                          className="flex items-center justify-center lg:justify-start text-sm text-text-secondary"
+                          className="flex items-center justify-start lg:justify-start text-sm text-text-secondary"
                         >
                           <CheckCircle className="w-4 h-4 text-gradient-start mr-3 flex-shrink-0" />
                           <span className="font-medium">{feature}</span>

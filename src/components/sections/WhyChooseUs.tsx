@@ -187,7 +187,7 @@ const WhyChooseUs = () => {
                           initial={{ opacity: 0, x: -10 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.3 + featureIndex * 0.1 }}
-                          className="flex items-center justify-center lg:justify-start text-sm text-text-secondary"
+                          className="flex items-center justify-start lg:justify-start text-sm text-text-secondary"
                         >
                           <CheckCircle className="w-4 h-4 text-gradient-start mr-2 flex-shrink-0" />
                           {feature}

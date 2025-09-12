@@ -5,9 +5,9 @@ export const COMPANY_INFO = {
   tagline: 'Web3 growth without the hype.',
   description: 'Leading Web3 marketing agency helping decentralized projects build thriving communities and achieve sustainable growth.',
   email: 'hello@kryptospire.com',
-  phone: '+1 (555) 123-4567',
-  location: 'San Francisco, CA',
-  founded: '2019',
+  phone: '+91 700759 99455',
+  location: 'Delhi, India',
+  founded: '2021',
   website: 'https://kryptospire.com'
 };
 
