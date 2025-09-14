@@ -17,7 +17,7 @@ const ServicesOverview = () => {
     {
       icon: Users,
       title: "Community Building",
-      description: "Build engaged, passionate communities that drive your project forward with authentic connections.",
+      description: "Build passionate communities that drive your project forward with authentic connections.",
       features: ["Discord/Telegram Setup", "Community Management", "Ambassador Programs"],
       gradient: "from-blue-500 to-cyan-500",
       delay: 0.1
@@ -49,7 +49,7 @@ const ServicesOverview = () => {
     {
       icon: Coins,
       title: "Tokenomics Design",
-      description: "Sustainable token economies that align incentives perfectly.",
+      description: "Sustainable token economies that align the incentives perfectly.",
       features: ["Token Design", "Economic Modeling", "Governance Design"],
       gradient: "from-indigo-500 to-purple-500",
       delay: 0.5
@@ -57,7 +57,7 @@ const ServicesOverview = () => {
     {
       icon: BarChart3,
       title: "Analytics & Insights",
-      description: "Deep data analysis to optimize performance and maximize ROI.",
+      description: "Deep data analysis to optimize the performance and maximize ROI.",
       features: ["Performance Analytics", "Market Research", "ROI Tracking"],
       gradient: "from-pink-500 to-rose-500",
       delay: 0.6
