@@ -4,6 +4,7 @@ import { NAVIGATION_ITEMS } from "@/constants/data";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Zap, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
