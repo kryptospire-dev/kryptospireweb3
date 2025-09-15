@@ -84,7 +84,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-text-secondary mb-8 sm:mb-10 lg:mb-12 max-w-4xl mx-auto leading-relaxed px-4 sm:px-6"
           >
-            We build authentic communities, create compelling content, and drive sustainable growth for Web3 projects that are changing the world.
+            As a leading Web3 marketing agency, we build authentic communities, create compelling content, and drive sustainable growth for Web3 projects that are changing the world.
           </motion.p>
 
           {/* CTA Buttons */}

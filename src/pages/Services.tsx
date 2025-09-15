@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SERVICES_DATA } from "@/constants/data";
 import { handleNavigation } from "@/utils/navigation";
 import ServiceDetails from "@/components/sections/ServiceDetails";
+import SEO from "@/components/SEO"; // ADD: Import SEO component
 import {
   Users,
   TrendingUp,
@@ -17,6 +18,50 @@ import {
   Globe,
   Rocket,
 } from "lucide-react";
+
+// ADD: Services Schema for SEO
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Web3 Marketing Services",
+  "description": "Comprehensive Web3 marketing services including crypto marketing, blockchain promotion, DeFi marketing, NFT campaigns, and bull run strategies",
+  "provider": {
+    "@type": "Organization",
+    "name": "Kryptospire"
+  },
+  "areaServed": "Worldwide",
+  "serviceType": "Marketing Services",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Web3 Marketing Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Community Building & Management",
+          "description": "Build and manage engaged Web3 communities"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Content Marketing & Strategy",
+          "description": "Strategic content marketing for blockchain projects"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Influencer & KOL Partnerships",
+          "description": "Connect with top crypto influencers and KOLs"
+        }
+      }
+    ]
+  }
+};
 
 const Services = () => {
   // Your Calendly URL - Same as Navigation and Footer
@@ -200,334 +245,355 @@ const Services = () => {
   };
 
   return (
-    <main className="min-h-screen pt-20">
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-background via-background to-surface">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.215, 0.61, 0.355, 1] }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <motion.h1
-              className="text-5xl lg:text-6xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
+    <>
+      {/* ADD: SEO Component */}
+      <SEO
+        title="Web3 Marketing Services - Expert Crypto & Blockchain Marketing Agency"
+        description="Comprehensive Web3 marketing services including crypto marketing, blockchain promotion, DeFi marketing, NFT campaigns, and bull run strategies. Drive explosive growth with our proven strategies."
+        keywords={[
+          'web3 marketing services',
+          'crypto marketing services',
+          'blockchain marketing services',
+          'bull run marketing strategy',
+          'cryptocurrency promotion',
+          'DeFi marketing',
+          'NFT marketing services',
+          'web3 marketing agency',
+          'crypto marketing agency',
+          'marketing agency'
+        ]}
+        canonical="/services"
+        structuredData={servicesSchema}
+      />
+
+      <main className="min-h-screen pt-20">
+        {/* Hero Section - UPDATED for SEO */}
+        <section className="section-padding bg-gradient-to-br from-background via-background to-surface">
+          <div className="container-custom">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.2,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
+              transition={{ duration: 0.9, ease: [0.215, 0.61, 0.355, 1] }}
+              className="text-center max-w-4xl mx-auto"
             >
-              <motion.span
-                className="gradient-text"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+              <motion.h1
+                className="text-5xl lg:text-6xl font-bold mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.7,
-                  delay: 0.5,
+                  duration: 0.8,
+                  delay: 0.2,
                   ease: [0.215, 0.61, 0.355, 1],
                 }}
               >
-                Comprehensive
-              </motion.span>{" "}
-              Web3 marketing services
-            </motion.h1>
-            <motion.p
-              className="text-xl text-text-secondary leading-relaxed mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.4,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
-            >
-              From strategy to execution, we provide end-to-end marketing
-              solutions designed to drive real growth for your Web3 project.
-            </motion.p>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.6,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
-            >
-              <motion.div
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                <Button variant="hero" size="xl" onClick={handleBookCall}>
-                  Get Custom Strategy
-                </Button>
-              </motion.div>
-              <motion.div
-                variants={buttonVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                whileTap="tap"
-                transition={{ delay: 0.1 }}
-              >
-                <Button
-                  variant="outline-glow"
-                  size="xl"
-                  onClick={handleViewCaseStudies}
+                <motion.span
+                  className="gradient-text"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.7,
+                    delay: 0.5,
+                    ease: [0.215, 0.61, 0.355, 1],
+                  }}
                 >
-                  See Results
-                </Button>
+                  Comprehensive
+                </motion.span>{" "}
+                Web3 marketing services
+              </motion.h1>
+              <motion.p
+                className="text-xl text-text-secondary leading-relaxed mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.4,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
+              >
+                From strategy to execution, we provide end-to-end <strong>crypto marketing services</strong> designed to drive real growth for your Web3 project during <strong>bull run</strong> periods.
+              </motion.p>
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.6,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
+              >
+                <motion.div
+                  variants={buttonVariants}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  <Button variant="hero" size="xl" onClick={handleBookCall}>
+                    Get Custom Strategy
+                  </Button>
+                </motion.div>
+                <motion.div
+                  variants={buttonVariants}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover="hover"
+                  whileTap="tap"
+                  transition={{ delay: 0.1 }}
+                >
+                  <Button
+                    variant="outline-glow"
+                    size="xl"
+                    onClick={handleViewCaseStudies}
+                  >
+                    See Results
+                  </Button>
+                </motion.div>
               </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Services Grid */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-            className="text-center mb-16"
-          >
-            <motion.h2
-              className="text-4xl lg:text-5xl font-bold mb-6"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.4,
-                delay: 0.1,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
-            >
-              <span className="gradient-text">Services</span> that scale
-            </motion.h2>
-            <motion.p
-              className="text-xl text-text-secondary max-w-3xl mx-auto"
+        {/* Services Grid */}
+        <section className="section-padding bg-background">
+          <div className="container-custom">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.4,
-                delay: 0.2,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+              className="text-center mb-16"
             >
-              Choose from our comprehensive suite of Web3 marketing services,
-              each designed to address specific growth challenges.
-            </motion.p>
-          </motion.div>
+              <motion.h2
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.1,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
+              >
+                <span className="gradient-text">Services</span> that scale
+              </motion.h2>
+              <motion.p
+                className="text-xl text-text-secondary max-w-3xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.2,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
+              >
+                Choose from our comprehensive suite of <strong>Web3 marketing services</strong>, each designed to address specific growth challenges.
+              </motion.p>
+            </motion.div>
 
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            {SERVICES_DATA.map((service, index) => {
-              const IconComponent = getIconComponent(service.icon);
-              return (
-                <motion.div
-                  key={service.title}
-                  variants={cardVariants}
-                  className="group cursor-pointer h-full"
-                  whileHover="hover"
-                >
+            {/* REST OF YOUR COMPONENT STAYS EXACTLY THE SAME */}
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              {SERVICES_DATA.map((service, index) => {
+                const IconComponent = getIconComponent(service.icon);
+                return (
                   <motion.div
-                    className="bg-surface border border-border rounded-xl p-8 h-full card-glow group-hover:border-gradient-start/30 
-                               transition-all duration-500 relative overflow-hidden
-                               flex flex-col items-center text-center 
-                               sm:items-start sm:text-left"
-                    variants={cardHoverVariants}
-                    initial="initial"
+                    key={service.title}
+                    variants={cardVariants}
+                    className="group cursor-pointer h-full"
                     whileHover="hover"
                   >
-                    {/* Subtle background gradient on hover */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-gradient-start/3 to-gradient-end/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      initial={false}
-                    />
-
-                    {/* Content */}
-                    <div className="relative z-10">
+                      className="bg-surface border border-border rounded-xl p-8 h-full card-glow group-hover:border-gradient-start/30 
+                                 transition-all duration-500 relative overflow-hidden
+                                 flex flex-col items-center text-center 
+                                 sm:items-start sm:text-left"
+                      variants={cardHoverVariants}
+                      initial="initial"
+                      whileHover="hover"
+                    >
+                      {/* Subtle background gradient on hover */}
                       <motion.div
-                        className={`flex items-center justify-center w-14 h-14 bg-gradient-to-br ${service.gradient} rounded-lg mb-6 
-                                    mx-auto sm:mx-0`}
-                        variants={iconVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        whileHover="hover"
-                        viewport={{ once: true }}
-                      >
-                        <IconComponent className="text-white" size={24} />
-                      </motion.div>
+                        className="absolute inset-0 bg-gradient-to-br from-gradient-start/3 to-gradient-end/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        initial={false}
+                      />
 
-                      <motion.h3
-                        className="text-xl font-semibold text-text-primary mb-4 group-hover:gradient-text transition-all duration-500"
-                        variants={titleVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                      >
-                        {service.title}
-                      </motion.h3>
+                      {/* Content */}
+                      <div className="relative z-10">
+                        <motion.div
+                          className={`flex items-center justify-center w-14 h-14 bg-gradient-to-br ${service.gradient} rounded-lg mb-6 
+                                      mx-auto sm:mx-0`}
+                          variants={iconVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          whileHover="hover"
+                          viewport={{ once: true }}
+                        >
+                          <IconComponent className="text-white" size={24} />
+                        </motion.div>
 
-                      <motion.p
-                        className="text-text-secondary mb-6 leading-relaxed"
-                        variants={descriptionVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                      >
-                        {service.description}
-                      </motion.p>
+                        <motion.h3
+                          className="text-xl font-semibold text-text-primary mb-4 group-hover:gradient-text transition-all duration-500"
+                          variants={titleVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true }}
+                        >
+                          {service.title}
+                        </motion.h3>
 
-                      <ul className="space-y-2">
-                        {service.features.map((feature, featureIndex) => (
-                          <motion.li
-                            key={featureIndex}
-                            className="flex items-center text-sm text-text-secondary"
-                            variants={featureVariants}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={featureIndex}
-                          >
-                            <motion.div
-                              className="w-1.5 h-1.5 bg-gradient-start rounded-full mr-3 flex-shrink-0"
-                              initial={{ scale: 0 }}
-                              whileInView={{ scale: 1 }}
+                        <motion.p
+                          className="text-text-secondary mb-6 leading-relaxed"
+                          variants={descriptionVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true }}
+                        >
+                          {service.description}
+                        </motion.p>
+
+                        <ul className="space-y-2">
+                          {service.features.map((feature, featureIndex) => (
+                            <motion.li
+                              key={featureIndex}
+                              className="flex items-center text-sm text-text-secondary"
+                              variants={featureVariants}
+                              initial="hidden"
+                              whileInView="visible"
                               viewport={{ once: true }}
-                              transition={{
-                                duration: 0.3,
-                                delay: 0.6 + featureIndex * 0.05,
-                                type: "spring",
-                                stiffness: 300,
-                              }}
-                            />
-                            {feature}
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
+                              custom={featureIndex}
+                            >
+                              <motion.div
+                                className="w-1.5 h-1.5 bg-gradient-start rounded-full mr-3 flex-shrink-0"
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                  duration: 0.3,
+                                  delay: 0.6 + featureIndex * 0.05,
+                                  type: "spring",
+                                  stiffness: 300,
+                                }}
+                              />
+                              {feature}
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
 
-                    {/* Hover border effect */}
-                    <motion.div
-                      className="absolute inset-0 border border-gradient-start/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      initial={false}
-                    />
+                      {/* Hover border effect */}
+                      <motion.div
+                        className="absolute inset-0 border border-gradient-start/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        initial={false}
+                      />
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
+                );
+              })}
+            </motion.div>
+          </div>
+        </section>
 
-      {/* Service Packages */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-      >
-        <ServiceDetails />
-      </motion.div>
+        {/* Service Packages */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+        >
+          <ServiceDetails />
+        </motion.div>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-background">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <motion.h2
-              className="text-4xl lg:text-5xl font-bold mb-6"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.7,
-                delay: 0.2,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
-            >
-              Ready to <span className="gradient-text">accelerate</span> your
-              growth?
-            </motion.h2>
-            <motion.p
-              className="text-xl text-text-secondary mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.7,
-                delay: 0.4,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
-            >
-              Let's discuss your project's unique needs and create a custom
-              strategy that delivers results.
-            </motion.p>
+        {/* CTA Section */}
+        <section className="section-padding bg-background">
+          <div className="container-custom">
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{
-                duration: 0.7,
-                delay: 0.6,
-                ease: [0.215, 0.61, 0.355, 1],
-              }}
+              transition={{ duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }}
+              className="text-center max-w-3xl mx-auto"
             >
-              <motion.div
-                variants={buttonVariants}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
-                whileTap="tap"
+              <motion.h2
+                className="text-4xl lg:text-5xl font-bold mb-6"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.2,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
               >
-                <Button variant="hero" size="xl" onClick={handleBookCall}>
-                  Book a Strategy Call
-                </Button>
-              </motion.div>
-              <motion.div
-                variants={buttonVariants}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
-                whileTap="tap"
+                Ready to <span className="gradient-text">accelerate</span> your
+                growth?
+              </motion.h2>
+              <motion.p
+                className="text-xl text-text-secondary mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.4,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
               >
-                <Button
-                  variant="outline-glow"
-                  size="xl"
-                  onClick={handleViewCaseStudies}
+                Let's discuss your project's unique needs and create a custom
+                strategy that delivers results.
+              </motion.p>
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.6,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
+              >
+                <motion.div
+                  variants={buttonVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  whileTap="tap"
+                  viewport={{ once: true }}
                 >
-                  View Case Studies
-                </Button>
+                  <Button variant="hero" size="xl" onClick={handleBookCall}>
+                    Book a Strategy Call
+                  </Button>
+                </motion.div>
+                <motion.div
+                  variants={buttonVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  whileTap="tap"
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <Button
+                    variant="outline-glow"
+                    size="xl"
+                    onClick={handleViewCaseStudies}
+                  >
+                    View Case Studies
+                  </Button>
+                </motion.div>
               </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
-    </main>
+          </div>
+        </section>
+      </main>
+    </>
   );
 };
 
