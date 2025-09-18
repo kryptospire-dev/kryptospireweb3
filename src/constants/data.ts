@@ -6,7 +6,7 @@ export const COMPANY_INFO = {
   description:
     "Leading Web3 marketing agency helping decentralized projects build thriving communities and achieve sustainable growth.",
   email: "kryptospire@gmail.com",
-  phone: "+91 700759 99455",
+  phone: "+91 70075 99455",
   location: "Delhi, India",
   founded: "2021",
   website: "https://kryptospire.com",
