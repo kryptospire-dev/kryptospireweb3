@@ -71,7 +71,7 @@ const Hero = () => {
         <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-start/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-end/20 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-gradient-to-r from-gradient-start/10 to-gradient-end/10 rounded-full blur-2xl animate-pulse delay-500" />
-        
+
         {/* Additional subtle background elements */}
         <div className="absolute top-16 right-20 w-20 h-20 sm:w-24 sm:h-24 bg-gradient-start/10 rounded-full blur-xl opacity-60" />
         <div className="absolute bottom-20 left-16 w-16 h-16 sm:w-20 sm:h-20 bg-gradient-end/10 rounded-full blur-lg opacity-60" />
@@ -87,19 +87,19 @@ const Hero = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight px-2 relative z-20"
             style={{ fontFamily: "Rajdhani, sans-serif", fontWeight: 700 }}
           >
-            <motion.span 
+            <motion.span
               className="gradient-text block tracking-tight"
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.3 }}
             >
-              Web3 growth
+              Fueling The Next
             </motion.span>
-            <motion.span 
+            <motion.span
               className="text-text-primary block tracking-tight"
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.3 }}
             >
-              without the hype.
+              Web3 Wave
             </motion.span>
           </motion.h1>
 
@@ -145,7 +145,7 @@ const Hero = () => {
                 />
               </Button>
             </motion.div>
-            
+
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -223,9 +223,9 @@ const Hero = () => {
                     key={index}
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: 0.8 + index * 0.15
+                    transition={{
+                      duration: 0.6,
+                      delay: 0.8 + index * 0.15,
                     }}
                     whileHover={{ scale: 1.02 }}
                     className="group cursor-pointer"
@@ -250,10 +250,10 @@ const Hero = () => {
                             {stat.suffix}
                           </motion.div>
                         </div>
-                        
+
                         {/* Separator Line */}
                         <div className="w-px h-12 bg-gradient-to-b from-transparent via-gradient-start/30 to-transparent"></div>
-                        
+
                         {/* Label */}
                         <div className="flex-1">
                           <div
@@ -285,10 +285,10 @@ const Hero = () => {
                       className="mt-2 h-0.5 bg-gradient-to-r from-gradient-start to-gradient-end rounded-full"
                       initial={{ width: 0 }}
                       animate={{ width: isInView ? "100%" : 0 }}
-                      transition={{ 
-                        duration: 1, 
+                      transition={{
+                        duration: 1,
                         delay: 0.8 + index * 0.15,
-                        ease: "easeOut"
+                        ease: "easeOut",
                       }}
                     />
                   </motion.div>

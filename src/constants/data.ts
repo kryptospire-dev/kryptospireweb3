@@ -2,11 +2,11 @@
 
 export const COMPANY_INFO = {
   name: "KryptoSpire",
-  tagline: "Web3 growth without the hype.",
+  tagline: "Fueling The Next Web3 Wave.",
   description:
     "Leading Web3 marketing agency helping decentralized projects build thriving communities and achieve sustainable growth.",
   email: "kryptospire@gmail.com",
-  phone: "+91 700759 99455",
+  phone: "+91 70075 99455",
   location: "Delhi, India",
   founded: "2021",
   website: "https://kryptospire.com",
@@ -23,7 +23,7 @@ export const NAVIGATION_ITEMS = [
 ];
 
 export const HERO_DATA = {
-  title: "Web3 growth without the hype.",
+  title: "Fueling The Next Web3 Wave",
   subtitle:
     "We help ambitious Web3 projects build authentic communities, drive sustainable growth, and create lasting impact in the decentralized world.",
   primaryCTA: "Book a Strategy Call",
@@ -101,7 +101,8 @@ export const SERVICES_DATA = [
   {
     icon: "Coins",
     title: "Tokenomics Design",
-    description: "Sustainable token economies that align the incentives perfectly.",
+    description:
+      "Sustainable token economies that align the incentives perfectly.",
     features: [
       "Token Design",
       "Economic Modeling",
@@ -126,7 +127,8 @@ export const SERVICES_DATA = [
   {
     icon: "Megaphone",
     title: "PR & Media Relations",
-    description: "Strategic media coverage and thought the leadership positioning.",
+    description:
+      "Strategic media coverage and thought the leadership positioning.",
     features: [
       "Press Release",
       "Media Outreach",

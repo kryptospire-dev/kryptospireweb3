@@ -116,7 +116,7 @@ const Footer = () => {
             </motion.div>
 
             <p className="text-text-secondary mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
-              Web3 growth without the hype. Building the future of decentralized
+              Fueling The Next Web3 Wave. Building the future of decentralized
               marketing.
             </p>
 
