@@ -10,7 +10,7 @@ const TrustedBy = () => {
     // { name: 'Apex Protocol', logo: '⚡' },
     { name: "Arbitrum", logo: "/arbitrum.jpg" },
     { name: "Polygon", logo: "/polygon.png" },
-    { name: "Minati", logo: "/minati.png" },
+   // { name: "Minati", logo: "/minati.png" },
     { name: "Uniswap", logo: "/images.png" },
     { name: "Aave", logo: "/aavee.png" },
     { name: "Apex Protocol", logo: "/apex-protocol.png" },
